@@ -23,12 +23,10 @@ class Restaurant extends Component {
     }
   }
 
-
-
   render() {
     if (this.state.restaurants) {
-      console.log(this.state.restaurants);
-      var content = <Text>{this.state.restaurants[9].vicinity}</Text>;
+      // console.log(this.state.restaurants);
+      var content = <Text>{this.state.restaurants[4].vicinity}</Text>;
     }
     return (
       <View style={styles.container} >
@@ -48,9 +46,9 @@ class Restaurant extends Component {
       .then((response) => response.json())
       .then((responseData) => {
         var restaurants = JSON.stringify(responseData);
-        console.log(restaurants); // DEBUGGING
+        // console.log(restaurants); // DEBUGGING
         AsyncStorage.setItem(STORAGE_KEY, restaurants);
-        this.setState({restaurants: restaurants })
+        this.setState({restaurants: restaurants });
     }).done();
   }
 
