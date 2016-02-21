@@ -25,15 +25,18 @@ class Restaurant extends Component {
       latitude: null,
       longitude: null,
       pan: new Animated.ValueXY(),
-      enter: new Animated.Value(0.5)
+      enter: new Animated.Value(1)
     }
   }
 
-  _resetState() {
-    this.state.pan.setValue({x: 0, y: 0});
-    this.state.enter.setValue(0);
-    // this._goToNextPerson();
-    // this._animateEntrance();
+
+
+  _goToNextRestaurant() {
+    this.props.navigator.replace({
+      title: 'nonosdfpos',
+      component: Restaurant,
+      passProps: { restaurant: this.props.restaurant, index: this.props.index + 1 }
+    });
   }
 
   render() {
@@ -110,10 +113,12 @@ class Restaurant extends Component {
         }
 
         if (Math.abs(this.state.pan.x._value) > SWIPE_THRESHOLD) {
+          if(-this.state.pan.x._value > SWIPE_THRESHOLD) {
+          }
           Animated.decay(this.state.pan, {
             velocity: {x: velocity, y: vy},
             deceleration: 0.98
-          }).start(this._resetState)
+          }).start(this._resetState.bind(this))
         } else {
           Animated.spring(this.state.pan, {
             toValue: {x: 0, y: 0},
@@ -124,6 +129,20 @@ class Restaurant extends Component {
     })
   }
 
+  _resetState() {
+    console.log(this)
+    this.state.pan.setValue({x: 0, y: 0});
+    this.state.enter.setValue(0);
+    this._goToNextRestaurant();
+    this._animateEntrance();
+  }
+
+  _animateEntrance() {
+    Animated.spring(
+      this.state.enter,
+      { toValue: 1, friction: 8 }
+    ).start();
+  }
 }
 
 const styles = StyleSheet.create({
