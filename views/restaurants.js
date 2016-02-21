@@ -22,12 +22,18 @@ class Restaurant extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      restaurants: null,
       latitude: null,
       longitude: null,
       pan: new Animated.ValueXY(),
       enter: new Animated.Value(0.5)
     }
+  }
+
+  _resetState() {
+    this.state.pan.setValue({x: 0, y: 0});
+    this.state.enter.setValue(0);
+    // this._goToNextPerson();
+    // this._animateEntrance();
   }
 
   render() {
@@ -49,19 +55,24 @@ class Restaurant extends Component {
     let nopeScale = pan.x.interpolate({inputRange: [-150, 0], outputRange: [1, 0.5], extrapolate: 'clamp'});
     let animatedNopeStyles = {transform: [{scale: nopeScale}], opacity: nopeOpacity}
 
-    if (this.state.restaurants) {
-      // console.log(this.state.restaurants);
-      var content = <Text>{this.state.restaurants[4].vicinity}</Text>;
+    var currentRestaurant = this.props.restaurant(this.props.index);
+    console.log(currentRestaurant);
+    if (currentRestaurant) {
+      // console.log(this.state.restaurants); // DEBUGGING
+      var content = <Text>{currentRestaurant.vicinity}</Text>;
+    } else {
+      var content = <Text>Restaurant disappeared!</Text>
     }
+
     return (
       <View style={styles.container} >
+          {content}
 
         <Animated.View style={styles.card, animatedCardStyles} {...this._panResponder.panHandlers}>
           <Image
             style={styles.icon}
             source={{uri: 'http://barcodedc.com/wp-content/gallery/food/healthfitnessrevolution-com.jpg'}}
           />
-          {content}
         </Animated.View>
 
         <Animated.View style={[styles.nope, animatedNopeStyles]} >
@@ -72,30 +83,6 @@ class Restaurant extends Component {
         </Animated.View>
       </View>
     )
-  }
-
-  fetchData({latitude, longitude}) {
-    fetch('http://agile-sands-84514.heroku.com/restaurants.json?latitude=' + latitude + '&longitude=' + longitude)
-      .then((response) => response.json())
-      .then((responseData) => {
-        var restaurants = JSON.stringify(responseData);
-        // console.log(restaurants); // DEBUGGING
-        AsyncStorage.setItem(STORAGE_KEY, restaurants);
-        this.setState({restaurants: restaurants });
-    }).done();
-  }
-
-
-
-  componentDidMount() {
-    AsyncStorage.getItem(STORAGE_KEY).then((value) => {
-      this.setState({restaurants: JSON.parse(value)})
-    })
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        this.fetchData(position.coords);
-      }
-    );
   }
 
   componentWillMount() {
