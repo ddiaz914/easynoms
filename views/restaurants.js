@@ -115,13 +115,14 @@ class Restaurant extends Component {
         }
 
         if (Math.abs(this.state.pan.x._value) > SWIPE_THRESHOLD) {
-          if(this.state.pan.x._value > SWIPE_THRESHOLD) {
+          var swipeFunction = this.state.pan.x._value > SWIPE_THRESHOLD ?
+            this._swipeRight.bind(this) :
+            this._resetState.bind(this);
 
-          }
           Animated.decay(this.state.pan, {
             velocity: {x: velocity, y: vy},
             deceleration: 0.98
-          }).start(this._resetState.bind(this))
+          }).start(swipeFunction)
         } else {
           Animated.spring(this.state.pan, {
             toValue: {x: 0, y: 0},
@@ -138,6 +139,21 @@ class Restaurant extends Component {
     this.state.enter.setValue(0);
     this._goToNextRestaurant();
     this._animateEntrance();
+  }
+
+  _swipeRight() {
+    var restaurant = this.props.restaurant(this.props.index);
+    this.state.pan.setValue({x: 0, y: 0});
+    this.state.enter.setValue(1);
+    this._goToInfo(restaurant);
+  }
+
+  _goToInfo(restaurant) {
+    this.props.navigator.push({
+      title: restaurant.name,
+      component: RestaurantInfo,
+      passProps: {restaurant: restaurant}
+    });
   }
 
   _animateEntrance() {
