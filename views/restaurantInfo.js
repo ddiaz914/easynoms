@@ -9,12 +9,26 @@ StyleSheet,
 Image,
 PanResponder,
 Animated,
-MapView
+MapView,
+TouchableOpacity
 } = React;
 
 const DELTA = 0.003021;
 
 class RestaurantInfo extends Component {
+
+  renderBackButton() {
+    return (
+      <TouchableOpacity
+        onPress={this.goBack.bind(this)}
+      >
+        <Text style={styles.backButton}> {'<<<'} </Text>
+      </TouchableOpacity>)
+  }
+
+  goBack() {
+    this.props.navigator.pop();
+  }
 
   render() {
     var restaurant = this.props.restaurant;
@@ -23,6 +37,7 @@ class RestaurantInfo extends Component {
 
       var content = (
         <View style={styles.container}>
+          {this.renderBackButton()}
            <Image
             style={styles.logo}
             source={require('../thumbnails/logoLowResWhite.png')}
@@ -77,6 +92,9 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     height: 100,
     width: 150
+  },
+  backButton: {
+    color: 'white',
   }
 })
 
