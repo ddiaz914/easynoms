@@ -15,14 +15,20 @@ class RestaurantInfo extends Component {
 
   render() {
     var restaurant = this.props.restaurant;
+    console.log(restaurant)
     if(restaurant) {
-      var content = restaurant.name;
+      var content = (<View style={styles.container}>
+          <Text>{restaurant.name}</Text>
+          <Text>Latitude: {restaurant.lat}</Text>
+          <Text>Longitude: {restaurant.lng}</Text>
+          <Text>{restaurant.website}</Text>
+        </View>);
     } else {
       var content = 'NONTHING';
     }
 
     return (<View style={styles.container}>
-          <Text>{content}</Text>
+          {content}
         </View>)
   }
 }

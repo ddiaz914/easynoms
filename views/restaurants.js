@@ -64,10 +64,13 @@ class Restaurant extends Component {
     console.log(currentRestaurant);
     if (currentRestaurant) {
       // console.log(this.state.restaurants); // DEBUGGING
-      var content = <Text>{currentRestaurant.vicinity}</Text>;
+      var content = <Text>{currentRestaurant.name}</Text>;
+      var url = currentRestaurant.photos[0];
     } else {
       var content = <Text>Restaurant disappeared!</Text>
+      var url = '';
     }
+
 
     return (
       <View style={styles.container} >
@@ -76,7 +79,7 @@ class Restaurant extends Component {
         <Animated.View style={styles.card, animatedCardStyles} {...this._panResponder.panHandlers}>
           <Image
             style={styles.icon}
-            source={{uri: 'http://barcodedc.com/wp-content/gallery/food/healthfitnessrevolution-com.jpg'}}
+            source={{uri: url}}
           />
         </Animated.View>
 
