@@ -8,8 +8,11 @@ AsyncStorage,
 StyleSheet,
 Image,
 PanResponder,
-Animated
+Animated,
+MapView
 } = React;
+
+const DELTA = 0.003021;
 
 class RestaurantInfo extends Component {
 
@@ -17,8 +20,18 @@ class RestaurantInfo extends Component {
     var restaurant = this.props.restaurant;
     console.log(restaurant)
     if(restaurant) {
-      var content = (<View style={styles.container}>
-          <Text>{restaurant.name}</Text>
+      var content = (
+        <View style={styles.container}>
+          <MapView style={styles.map}
+            showUserLocation='true'
+            region={{
+              latitude: restaurant.lat,
+              longitude: restaurant.lng,
+              latitudeDelta: DELTA,
+              longitudeDelta: DELTA,
+            }}
+          />
+        <Text>{restaurant.name}</Text>
           <Text>Latitude: {restaurant.lat}</Text>
           <Text>Longitude: {restaurant.lng}</Text>
           <Text>{restaurant.website}</Text>
@@ -40,6 +53,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
+  },
+  map: {
+    width: 300,
+    height: 150
   }
 })
 
