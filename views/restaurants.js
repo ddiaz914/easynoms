@@ -64,10 +64,13 @@ class Restaurant extends Component {
     console.log(currentRestaurant);
     if (currentRestaurant) {
       // console.log(this.state.restaurants); // DEBUGGING
-      var content = <Text>{currentRestaurant.vicinity}</Text>;
+      var content = <Text>{currentRestaurant.name}</Text>;
+      var url = currentRestaurant.photos[0];
     } else {
       var content = <Text>Restaurant disappeared!</Text>
+      var url = '';
     }
+
 
     return (
       <View style={styles.container} >
@@ -76,7 +79,7 @@ class Restaurant extends Component {
         <Animated.View style={styles.card, animatedCardStyles} {...this._panResponder.panHandlers}>
           <Image
             style={styles.icon}
-            source={{uri: 'http://barcodedc.com/wp-content/gallery/food/healthfitnessrevolution-com.jpg'}}
+            source={{uri: url}}
           />
         </Animated.View>
 
@@ -115,13 +118,14 @@ class Restaurant extends Component {
         }
 
         if (Math.abs(this.state.pan.x._value) > SWIPE_THRESHOLD) {
-          if(this.state.pan.x._value > SWIPE_THRESHOLD) {
+          var swipeFunction = this.state.pan.x._value > SWIPE_THRESHOLD ?
+            this._swipeRight.bind(this) :
+            this._resetState.bind(this);
 
-          }
           Animated.decay(this.state.pan, {
             velocity: {x: velocity, y: vy},
             deceleration: 0.98
-          }).start(this._resetState.bind(this))
+          }).start(swipeFunction)
         } else {
           Animated.spring(this.state.pan, {
             toValue: {x: 0, y: 0},
@@ -138,6 +142,21 @@ class Restaurant extends Component {
     this.state.enter.setValue(0);
     this._goToNextRestaurant();
     this._animateEntrance();
+  }
+
+  _swipeRight() {
+    var restaurant = this.props.restaurant(this.props.index);
+    this.state.pan.setValue({x: 0, y: 0});
+    this.state.enter.setValue(1);
+    this._goToInfo(restaurant);
+  }
+
+  _goToInfo(restaurant) {
+    this.props.navigator.push({
+      title: restaurant.name,
+      component: RestaurantInfo,
+      passProps: {restaurant: restaurant}
+    });
   }
 
   _animateEntrance() {

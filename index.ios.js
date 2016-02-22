@@ -45,7 +45,7 @@ class EasyNoms extends Component {
 
   getRestaurant(index) {
     if(this.state.restaurants) {
-      console.log(this.state.restaurants);
+      // console.log(this.state.restaurants);
       return this.state.restaurants[index];
     };
     return null;
@@ -55,6 +55,7 @@ class EasyNoms extends Component {
     AsyncStorage.getItem(STORAGE_KEY).then((value) => {
       this.setState({restaurants: JSON.parse(value)})
     })
+    // Gets data based on geo coordinates
     // navigator.geolocation.getCurrentPosition(( position) => {this.fetchData(position.coords)});
   }
 
