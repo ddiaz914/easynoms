@@ -30,11 +30,12 @@ class EasyNoms extends Component {
   }
 
   renderScene(route, navigator){
+
     if(route.component === Restaurant){
       return(
         <Restaurant
-          restaurant={this.getRestaurant.bind(this)}
-          index={0}
+          restaurant={this.state.restaurants[route.index]}
+          index={route.index}
           navigator={navigator}
           />
       );
@@ -60,7 +61,6 @@ class EasyNoms extends Component {
         title: 'Nom Noms',
         component: Restaurant,
         index: 0
-        // passProps: { restaurant: this.getRestaurant.bind(this), index: 0 }
       }}
       renderScene={this.renderScene.bind(this)}
     />
@@ -69,7 +69,6 @@ class EasyNoms extends Component {
 
   getRestaurant(index) {
     if(this.state.restaurants) {
-      // console.log(this.state.restaurants);
       return this.state.restaurants[index];
     };
     return null;
