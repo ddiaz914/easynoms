@@ -13,7 +13,7 @@ import React, {
   Text,
   View,
   TextInput,
-  NavigatorIOS,
+  Navigator,
   AsyncStorage
 } from 'react-native';
 
@@ -29,20 +29,41 @@ class EasyNoms extends Component {
     }
   }
 
+  renderScene(route, navigator){
+    if(route.component === Restaurant){
+      return(
+        <Restaurant
+          restaurant={this.getRestaurant.bind(this)}
+          index={0}
+          navigator={navigator}
+          />
+      );
+    } else {
+      return(
+        <RestaurantInfo
+          restaurant={route.passProps.restaurant}
+          navigator={navigator}
+        />
+      );
+    }
+  }
+
   render() {
     console.log(this.state.restaurants)
     if(!this.state.restaurants) {
       return this.renderLoadingScreen();
     }
     return (
-    <NavigatorIOS
+    <Navigator
       style={styles.wrapper}
       initialRoute={{
         title: 'Nom Noms',
         component: Restaurant,
-        passProps: { restaurant: this.getRestaurant.bind(this), index: 0 }
+        index: 0
+        // passProps: { restaurant: this.getRestaurant.bind(this), index: 0 }
       }}
-    ></NavigatorIOS>
+      renderScene={this.renderScene.bind(this)}
+    />
     );
   }
 
