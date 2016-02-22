@@ -12,23 +12,29 @@ Animated,
 MapView
 } = React;
 
+const DELTA = 0.003021;
+
 class RestaurantInfo extends Component {
 
   render() {
     var restaurant = this.props.restaurant;
     console.log(restaurant)
     if(restaurant) {
-      var content = (<View style={styles.container}>
-          <Text>{restaurant.name}</Text>
+      var content = (
+        <View style={styles.container}>
+          <MapView style={styles.map}
+            showUserLocation='true'
+            region={{
+              latitude: restaurant.lat,
+              longitude: restaurant.lng,
+              latitudeDelta: DELTA,
+              longitudeDelta: DELTA,
+            }}
+          />
+        <Text>{restaurant.name}</Text>
           <Text>Latitude: {restaurant.lat}</Text>
           <Text>Longitude: {restaurant.lng}</Text>
           <Text>{restaurant.website}</Text>
-          <MapView style={styles.map}
-            initialRegion={{
-              latitude: restaurant.lat,
-              longitude: restaurant.lng,
-            }}
-          />
         </View>);
     } else {
       var content = 'NONTHING';
@@ -49,7 +55,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5FCFF',
   },
   map: {
-    width: 300
+    width: 300,
+    height: 150
   }
 })
 
