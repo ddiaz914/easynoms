@@ -18,6 +18,7 @@ import React, {
 } from 'react-native';
 
 var Restaurant = require('./views/restaurants');
+var RestaurantInfo = require('./views/restaurantInfo');
 
 class EasyNoms extends Component {
 
@@ -35,7 +36,7 @@ class EasyNoms extends Component {
       style={styles.wrapper}
       initialRoute={{
         title: 'Nom Noms',
-        component: Restaurant,
+        component: RestaurantInfo,
         passProps: { restaurant: this.getRestaurant.bind(this), index: 0 }
       }}
     ></NavigatorIOS>
@@ -44,8 +45,8 @@ class EasyNoms extends Component {
 
   getRestaurant(index) {
     if(this.state.restaurants) {
-      console.log(this.state.restaurants)
-      return this.state.restaurants[index]
+      console.log(this.state.restaurants);
+      return this.state.restaurants[index];
     };
     return null;
   }
