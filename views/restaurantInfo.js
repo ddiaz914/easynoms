@@ -8,8 +8,11 @@ AsyncStorage,
 StyleSheet,
 Image,
 PanResponder,
-Animated
+Animated,
+MapView
 } = React;
+
+const DELTA = 0.003021;
 
 class RestaurantInfo extends Component {
 
@@ -17,10 +20,23 @@ class RestaurantInfo extends Component {
     var restaurant = this.props.restaurant;
     console.log(restaurant)
     if(restaurant) {
-      var content = (<View style={styles.container}>
-          <Text style={styles.content}>{restaurant.name}</Text>
-          <Text style={styles.content}>Latitude: {restaurant.lat}</Text>
-          <Text style={styles.content}>Longitude: {restaurant.lng}</Text>
+
+      var content = (
+        <View style={styles.container}>
+           <Image
+            style={styles.logo}
+            source={require('../thumbnails/logoLowResWhite.png')}
+          />
+          <Text style={styles.title}>{restaurant.name}</Text>
+          <MapView style={styles.map}
+            showUserLocation='true'
+            region={{
+              latitude: restaurant.lat,
+              longitude: restaurant.lng,
+              latitudeDelta: DELTA,
+              longitudeDelta: DELTA,
+            }}
+          />
           <Text style={styles.content}>{restaurant.website}</Text>
         </View>);
     } else {
@@ -41,9 +57,26 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#300030',
   },
+  title: {
+    color: 'white',
+    fontFamily: 'Hiragino Kaku Gothic ProN',
+    marginBottom: 10,
+    marginTop: 10
+  },
   content: {
     color: 'white',
-    fontFamily: 'Hiragino Kaku Gothic ProN'
+    fontFamily: 'Hiragino Kaku Gothic ProN',
+  },
+  map: {
+    width: 350,
+    height: 350,
+    marginBottom: 10
+  },
+  logo: {
+    marginTop: 10,
+    marginBottom: 10,
+    height: 100,
+    width: 150
   }
 })
 

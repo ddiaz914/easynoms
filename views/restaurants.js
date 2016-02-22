@@ -74,7 +74,11 @@ class Restaurant extends Component {
 
     return (
       <View style={styles.container} >
-          {content}
+
+          <Image
+            style={styles.logo}
+            source={require('../thumbnails/logoLowResWhite.png')}
+          />
 
         <Animated.View style={styles.card, animatedCardStyles} {...this._panResponder.panHandlers}>
           <Image
@@ -218,6 +222,11 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: 'white',
     fontFamily: 'Hiragino Kaku Gothic ProN'
+  },
+  logo: {
+    marginBottom: 50,
+    height: 100,
+    width: 150
   }
 })
 

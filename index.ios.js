@@ -14,7 +14,8 @@ import React, {
   View,
   TextInput,
   NavigatorIOS,
-  AsyncStorage
+  AsyncStorage,
+  Image
 } from 'react-native';
 
 var Restaurant = require('./views/restaurants');
@@ -77,12 +78,14 @@ class EasyNoms extends Component {
   renderLoadingScreen() {
     return (
       <View style={styles.loading}>
-        <Text>Loading</Text>
+          <Image
+            style={styles.loadingLogo}
+            source={require('./thumbnails/animationLowResWhite.png')}
+          />
       </View>
     )
   }
 }
-
 
 var styles = StyleSheet.create({
   wrapper: {
@@ -93,6 +96,10 @@ var styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#300030'
+  },
+  loadingLogo: {
+    height: 200,
+    width: 200
   }
 });
 
