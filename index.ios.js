@@ -14,7 +14,8 @@ import React, {
   View,
   TextInput,
   Navigator,
-  AsyncStorage
+  AsyncStorage,
+  Image
 } from 'react-native';
 
 var Restaurant = require('./views/restaurants');
@@ -58,7 +59,7 @@ class EasyNoms extends Component {
     <Navigator
       style={styles.wrapper}
       initialRoute={{
-        title: 'Nom Noms',
+        title: 'Easy Noms',
         component: Restaurant,
         index: 0
       }}
@@ -87,7 +88,7 @@ class EasyNoms extends Component {
     console.log(latitude);
     var promise = fetch('http://agile-sands-84514.heroku.com/restaurants.json?latitude=' + latitude + '&longitude=' + longitude);
     promise.then((response) => response.json()).then((restaurants) => {
-        // AsyncStorage.setItem(STORAGE_KEY, restaurants);
+        AsyncStorage.setItem(STORAGE_KEY, restaurants);
         this.setState({restaurants: restaurants });
     })
     .catch( (error) => console.log(error) )
@@ -97,12 +98,14 @@ class EasyNoms extends Component {
   renderLoadingScreen() {
     return (
       <View style={styles.loading}>
-        <Text>Loading</Text>
+          <Image
+            style={styles.loadingLogo}
+            // source={require('./thumbnails/animationLowResWhite.png')}
+          />
       </View>
     )
   }
 }
-
 
 var styles = StyleSheet.create({
   wrapper: {
@@ -111,7 +114,12 @@ var styles = StyleSheet.create({
   loading: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    backgroundColor: '#300030'
+  },
+  loadingLogo: {
+    height: 200,
+    width: 200
   }
 });
 

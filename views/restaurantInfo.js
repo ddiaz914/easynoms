@@ -20,8 +20,14 @@ class RestaurantInfo extends Component {
     var restaurant = this.props.restaurant;
     console.log(restaurant)
     if(restaurant) {
+
       var content = (
         <View style={styles.container}>
+           <Image
+            style={styles.logo}
+            source={require('../thumbnails/logoLowResWhite.png')}
+          />
+          <Text style={styles.title}>{restaurant.name}</Text>
           <MapView style={styles.map}
             showUserLocation={true}
             region={{
@@ -31,10 +37,7 @@ class RestaurantInfo extends Component {
               longitudeDelta: DELTA,
             }}
           />
-        <Text>{restaurant.name}</Text>
-          <Text>Latitude: {restaurant.lat}</Text>
-          <Text>Longitude: {restaurant.lng}</Text>
-          <Text>{restaurant.website}</Text>
+          <Text style={styles.content}>{restaurant.website}</Text>
         </View>);
     } else {
       var content = 'NONTHING';
@@ -52,11 +55,28 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#300030',
+  },
+  title: {
+    color: 'white',
+    fontFamily: 'Hiragino Kaku Gothic ProN',
+    marginBottom: 10,
+    marginTop: 10
+  },
+  content: {
+    color: 'white',
+    fontFamily: 'Hiragino Kaku Gothic ProN',
   },
   map: {
-    width: 300,
-    height: 150
+    width: 350,
+    height: 350,
+    marginBottom: 10
+  },
+  logo: {
+    marginTop: 10,
+    marginBottom: 10,
+    height: 100,
+    width: 150
   }
 })
 
