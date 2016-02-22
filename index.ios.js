@@ -56,11 +56,11 @@ class EasyNoms extends Component {
 
   componentDidMount() {
     // Leave for potential caching / debuggin purposes
-    // AsyncStorage.getItem(STORAGE_KEY).then((value) => {
-    //   this.setState({restaurants: JSON.parse(value)})
-    // })
+    AsyncStorage.getItem(STORAGE_KEY).then((value) => {
+      this.setState({restaurants: JSON.parse(value)})
+    })
     // Gets data based on geo coordinates
-    navigator.geolocation.getCurrentPosition(( position) => {this.fetchData(position.coords)});
+    // navigator.geolocation.getCurrentPosition(( position) => {this.fetchData(position.coords)});
   }
 
   fetchData({latitude, longitude}) {

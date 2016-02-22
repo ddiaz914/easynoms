@@ -8,7 +8,8 @@ AsyncStorage,
 StyleSheet,
 Image,
 PanResponder,
-Animated
+Animated,
+MapView
 } = React;
 
 class RestaurantInfo extends Component {
@@ -22,6 +23,12 @@ class RestaurantInfo extends Component {
           <Text>Latitude: {restaurant.lat}</Text>
           <Text>Longitude: {restaurant.lng}</Text>
           <Text>{restaurant.website}</Text>
+          <MapView style={styles.map}
+            initialRegion={{
+              latitude: restaurant.lat,
+              longitude: restaurant.lng,
+            }}
+          />
         </View>);
     } else {
       var content = 'NONTHING';
@@ -40,6 +47,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
+  },
+  map: {
+    width: 300
   }
 })
 
