@@ -23,7 +23,7 @@ class RestaurantInfo extends Component {
       var content = (
         <View style={styles.container}>
           <MapView style={styles.map}
-            showUserLocation='true'
+            showUserLocation={true}
             region={{
               latitude: restaurant.lat,
               longitude: restaurant.lng,
