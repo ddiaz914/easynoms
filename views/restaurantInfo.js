@@ -18,10 +18,10 @@ class RestaurantInfo extends Component {
     console.log(restaurant)
     if(restaurant) {
       var content = (<View style={styles.container}>
-          <Text>{restaurant.name}</Text>
-          <Text>Latitude: {restaurant.lat}</Text>
-          <Text>Longitude: {restaurant.lng}</Text>
-          <Text>{restaurant.website}</Text>
+          <Text style={styles.content}>{restaurant.name}</Text>
+          <Text style={styles.content}>Latitude: {restaurant.lat}</Text>
+          <Text style={styles.content}>Longitude: {restaurant.lng}</Text>
+          <Text style={styles.content}>{restaurant.website}</Text>
         </View>);
     } else {
       var content = 'NONTHING';
@@ -39,7 +39,11 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#300030',
+  },
+  content: {
+    color: 'white',
+    fontFamily: 'Hiragino Kaku Gothic ProN'
   }
 })
 

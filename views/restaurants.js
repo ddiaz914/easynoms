@@ -64,7 +64,7 @@ class Restaurant extends Component {
     console.log(currentRestaurant);
     if (currentRestaurant) {
       // console.log(this.state.restaurants); // DEBUGGING
-      var content = <Text>{currentRestaurant.name}</Text>;
+      var content = <Text style={styles.content}>{currentRestaurant.name}</Text>;
       var url = currentRestaurant.photos[0];
     } else {
       var content = <Text>Restaurant disappeared!</Text>
@@ -84,10 +84,10 @@ class Restaurant extends Component {
         </Animated.View>
 
         <Animated.View style={[styles.nope, animatedNopeStyles]} >
-          <Text style={styles.nopeText}>Nope</Text>
+          <Text style={styles.nopeText}>No No</Text>
         </Animated.View>
         <Animated.View style={[styles.yup, animatedYupStyles]}>
-          <Text style={styles.yupText}>Yup</Text>
+          <Text style={styles.yupText}>Nom Nom</Text>
         </Animated.View>
       </View>
     )
@@ -173,7 +173,13 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#300030'
+  },
+  content: {
+    color: 'white',
+    fontSize: 25,
+    marginBottom: 20,
+    fontFamily: 'Hiragino Kaku Gothic ProN'
   },
   icon: {
     width: 400,
@@ -186,7 +192,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'red'
   },
   yup: {
-    borderColor: 'green',
+    borderColor: 'white',
     borderWidth: 2,
     position: 'absolute',
     padding: 20,
@@ -195,11 +201,12 @@ const styles = StyleSheet.create({
     right: 20,
   },
   yupText: {
-    fontSize: 16,
-    color: 'green',
+    fontSize: 20,
+    color: 'white',
+    fontFamily: 'Hiragino Kaku Gothic ProN'
   },
   nope: {
-    borderColor: 'red',
+    borderColor: 'white',
     borderWidth: 2,
     position: 'absolute',
     bottom: 20,
@@ -208,8 +215,9 @@ const styles = StyleSheet.create({
     left: 20,
   },
   nopeText: {
-    fontSize: 16,
-    color: 'red',
+    fontSize: 20,
+    color: 'white',
+    fontFamily: 'Hiragino Kaku Gothic ProN'
   }
 })
 

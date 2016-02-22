@@ -38,7 +38,7 @@ class EasyNoms extends Component {
     <NavigatorIOS
       style={styles.wrapper}
       initialRoute={{
-        title: 'Nom Noms',
+        title: 'Easy Noms',
         component: Restaurant,
         passProps: { restaurant: this.getRestaurant.bind(this), index: 0 }
       }}
@@ -56,18 +56,18 @@ class EasyNoms extends Component {
 
   componentDidMount() {
     // Leave for potential caching / debuggin purposes
-    // AsyncStorage.getItem(STORAGE_KEY).then((value) => {
-    //   this.setState({restaurants: JSON.parse(value)})
-    // })
+    AsyncStorage.getItem(STORAGE_KEY).then((value) => {
+      this.setState({restaurants: JSON.parse(value)})
+    })
     // Gets data based on geo coordinates
-    navigator.geolocation.getCurrentPosition(( position) => {this.fetchData(position.coords)});
+    // navigator.geolocation.getCurrentPosition(( position) => {this.fetchData(position.coords)});
   }
 
   fetchData({latitude, longitude}) {
     console.log(latitude);
     var promise = fetch('http://agile-sands-84514.heroku.com/restaurants.json?latitude=' + latitude + '&longitude=' + longitude);
     promise.then((response) => response.json()).then((restaurants) => {
-        // AsyncStorage.setItem(STORAGE_KEY, restaurants);
+        AsyncStorage.setItem(STORAGE_KEY, restaurants);
         this.setState({restaurants: restaurants });
     })
     .catch( (error) => console.log(error) )
@@ -91,7 +91,8 @@ var styles = StyleSheet.create({
   loading: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    backgroundColor: '#300030'
   }
 });
 
