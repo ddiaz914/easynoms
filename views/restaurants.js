@@ -33,11 +33,11 @@ class Restaurant extends Component {
 
 
   _goToNextRestaurant() {
-    var restaurant = this.props.restaurant( this.props.index + 1);
+    var restaurant = this.props.restaurant;
     this.props.navigator.replace({
       title: restaurant.name,
       component: Restaurant,
-      passProps: { restaurant: this.props.restaurant, index: this.props.index + 1 }
+      index: this.props.index + 1
     });
   }
 
@@ -60,7 +60,7 @@ class Restaurant extends Component {
     let nopeScale = pan.x.interpolate({inputRange: [-150, 0], outputRange: [1, 0.5], extrapolate: 'clamp'});
     let animatedNopeStyles = {transform: [{scale: nopeScale}], opacity: nopeOpacity}
 
-    var currentRestaurant = this.props.restaurant(this.props.index);
+    var currentRestaurant = this.props.restaurant;
     console.log(currentRestaurant);
     if (currentRestaurant) {
       // console.log(this.state.restaurants); // DEBUGGING
@@ -145,7 +145,7 @@ class Restaurant extends Component {
   }
 
   _swipeRight() {
-    var restaurant = this.props.restaurant(this.props.index);
+    var restaurant = this.props.restaurant;
     this.state.pan.setValue({x: 0, y: 0});
     this.state.enter.setValue(1);
     this._goToInfo(restaurant);
