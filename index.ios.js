@@ -100,7 +100,7 @@ class EasyNoms extends Component {
       <View style={styles.loading}>
           <Image
             style={styles.loadingLogo}
-            source={require('./thumbnails/animationLowResWhite.png')}
+            // source={require('./thumbnails/animationLowResWhite.png')}
           />
       </View>
     )
