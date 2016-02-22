@@ -36,7 +36,7 @@ class EasyNoms extends Component {
       style={styles.wrapper}
       initialRoute={{
         title: 'Nom Noms',
-        component: RestaurantInfo,
+        component: Restaurant,
         passProps: { restaurant: this.getRestaurant.bind(this), index: 0 }
       }}
     ></NavigatorIOS>

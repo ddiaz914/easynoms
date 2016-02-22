@@ -14,7 +14,7 @@ Animated
 class RestaurantInfo extends Component {
 
   render() {
-    var restaurant = this.props.restaurant(0);
+    var restaurant = this.props.restaurant;
     if(restaurant) {
       var content = restaurant.name;
     } else {

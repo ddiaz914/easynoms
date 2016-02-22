@@ -3,6 +3,7 @@
 var React = require('react-native');
 const STORAGE_KEY = 'restaurantsKey';
 import clamp from 'clamp';
+var RestaurantInfo = require('./restaurantInfo');
 
 var {
 View,
@@ -32,8 +33,9 @@ class Restaurant extends Component {
 
 
   _goToNextRestaurant() {
+    var restaurant = this.props.restaurant( this.props.index + 1);
     this.props.navigator.replace({
-      title: 'nonosdfpos',
+      title: restaurant.name,
       component: Restaurant,
       passProps: { restaurant: this.props.restaurant, index: this.props.index + 1 }
     });
@@ -113,7 +115,8 @@ class Restaurant extends Component {
         }
 
         if (Math.abs(this.state.pan.x._value) > SWIPE_THRESHOLD) {
-          if(-this.state.pan.x._value > SWIPE_THRESHOLD) {
+          if(this.state.pan.x._value > SWIPE_THRESHOLD) {
+
           }
           Animated.decay(this.state.pan, {
             velocity: {x: velocity, y: vy},
