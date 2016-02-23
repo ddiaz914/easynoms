@@ -21,6 +21,7 @@ import React, {
 var Restaurant = require('./views/restaurants');
 var RestaurantInfo = require('./views/restaurantInfo');
 var EndPage = require('./views/endpage');
+var LoadingScreen = require('./views/loadingScreen');
 
 class EasyNoms extends Component {
 
@@ -57,7 +58,7 @@ class EasyNoms extends Component {
   render() {
     console.log(this.state.restaurants)
     if(!this.state.restaurants) {
-      return this.renderLoadingScreen();
+      return <LoadingScreen />;
     }
     return (
     <Navigator
@@ -98,33 +99,13 @@ class EasyNoms extends Component {
     .catch( (error) => console.log(error) )
     .done();
   }
-
-  renderLoadingScreen() {
-    return (
-      <View style={styles.loading}>
-          <Image
-            style={styles.loadingLogo}
-            source={require('./thumbnails/animationLowResWhite.png')}
-          />
-      </View>
-    )
-  }
 }
 
 var styles = StyleSheet.create({
   wrapper: {
     flex: 1,
   },
-  loading: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#300030'
-  },
-  loadingLogo: {
-    height: 200,
-    width: 200
-  }
+
 });
 
 AppRegistry.registerComponent('EasyNoms', () => EasyNoms);
