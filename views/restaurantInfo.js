@@ -60,7 +60,7 @@ class RestaurantInfo extends Component {
           </TouchableOpacity>
         </View>);
     } else {
-      var content = 'NONTHING';
+      var content = 'NOTHING';
     }
 
     return (<View style={styles.container}>
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
   content: {
     color: 'white',
     fontFamily: 'Hiragino Kaku Gothic ProN',
-    marginBottom: 150
+    marginBottom: 80
   },
   map: {
     width: 350,
