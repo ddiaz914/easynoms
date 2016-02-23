@@ -53,9 +53,9 @@ class EasyNoms extends Component {
 
   render() {
     console.log(this.state.restaurants)
-    // if(!this.state.restaurants) {
+    if(!this.state.restaurants) {
       return <LoadingScreen />;
-    // }
+    }
     return (
     <Navigator
       style={styles.wrapper}
