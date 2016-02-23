@@ -10,7 +10,8 @@ Image,
 PanResponder,
 Animated,
 MapView,
-TouchableOpacity
+TouchableOpacity,
+Linking
 } = React;
 
 const DELTA = 0.003021;
@@ -52,7 +53,11 @@ class RestaurantInfo extends Component {
               longitudeDelta: DELTA,
             }}
           />
-          <Text style={styles.content}>{restaurant.website}</Text>
+          <TouchableOpacity
+            onPress={ () => { Linking.openURL(restaurant.website)}}
+          >
+            <Text style={styles.content}>Go To Webpage</Text>
+          </TouchableOpacity>
         </View>);
     } else {
       var content = 'NONTHING';
