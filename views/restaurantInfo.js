@@ -60,7 +60,7 @@ class RestaurantInfo extends Component {
           </TouchableOpacity>
         </View>);
     } else {
-      var content = 'NONTHING';
+      var content = 'NOTHING';
     }
 
     return (<View style={styles.container}>
