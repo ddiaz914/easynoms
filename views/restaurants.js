@@ -69,7 +69,6 @@ class Restaurant extends Component {
       var url3 = currentRestaurant.photos[2];
     } else {
       SWIPE_THRESHOLD=1000;
-      var content = <Text style={styles.content}>Seriously? Nothing? Orange juice and cereal?</Text>;
     }
 
 
@@ -79,7 +78,6 @@ class Restaurant extends Component {
             style={styles.logo}
             source={require('../thumbnails/logoLowResWhite.png')}
           />
-          {content}
         <Animated.View style={styles.card, animatedCardStyles} {...this._panResponder.panHandlers}>
           <Image
             style={styles.icon}
