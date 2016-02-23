@@ -76,7 +76,7 @@ class Restaurant extends Component {
       <View style={styles.container} >
           <Image
             style={styles.logo}
-            source={require('../thumbnails/logoLowResWhite.png')}
+            source={require('../thumbnails/logohighreswhite_720.png')}
           />
         <Animated.View style={styles.card, animatedCardStyles} {...this._panResponder.panHandlers}>
           <Image
