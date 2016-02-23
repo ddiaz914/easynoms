@@ -20,6 +20,7 @@ import React, {
 
 var Restaurant = require('./views/restaurants');
 var RestaurantInfo = require('./views/restaurantInfo');
+var EndPage = require('./views/endpage');
 
 class EasyNoms extends Component {
 
@@ -33,6 +34,9 @@ class EasyNoms extends Component {
   renderScene(route, navigator){
 
     if(route.component === Restaurant){
+      if(route.index >= this.state.restaurants.length) {
+        return <EndPage/>
+      };
       return(
         <Restaurant
           restaurant={this.state.restaurants[route.index]}
