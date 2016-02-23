@@ -23,7 +23,7 @@ class RestaurantInfo extends Component {
       <TouchableOpacity
         onPress={this.goBack.bind(this)}
       >
-        <Text style={styles.backButton}> {'<<< Search'} </Text>
+        <Text style={styles.backButton}> {'< Back'} </Text>
       </TouchableOpacity>)
   }
 
