@@ -64,26 +64,34 @@ class Restaurant extends Component {
     console.log(currentRestaurant);
     if (currentRestaurant) {
       // console.log(this.state.restaurants); // DEBUGGING
-      var content = <Text style={styles.content}>{currentRestaurant.name}</Text>;
-      var url = currentRestaurant.photos[0];
+      var url1 = currentRestaurant.photos[0];
+      var url2 = currentRestaurant.photos[1];
+      var url3 = currentRestaurant.photos[2];
     } else {
-      var content = <Text>Restaurant disappeared!</Text>
-      var url = '';
+      SWIPE_THRESHOLD=1000;
+      var content = <Text style={styles.content}>Seriously? Nothing? Orange juice and cereal?</Text>;
     }
 
 
     return (
       <View style={styles.container} >
-
           <Image
             style={styles.logo}
             source={require('../thumbnails/logoLowResWhite.png')}
           />
-
+          {content}
         <Animated.View style={styles.card, animatedCardStyles} {...this._panResponder.panHandlers}>
           <Image
             style={styles.icon}
-            source={{uri: url}}
+            source={{uri: url1}}
+          />
+          <Image
+            style={styles.icon}
+            source={{uri: url2}}
+          />
+          <Image
+            style={styles.icon}
+            source={{uri: url3}}
           />
         </Animated.View>
 
@@ -187,7 +195,8 @@ const styles = StyleSheet.create({
   },
   icon: {
     width: 400,
-    height: 300,
+    height: 150,
+    margin: 2,
     justifyContent: 'center'
   },
   card: {

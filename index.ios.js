@@ -77,18 +77,18 @@ class EasyNoms extends Component {
 
   componentDidMount() {
     // Leave for potential caching / debuggin purposes
-    AsyncStorage.getItem(STORAGE_KEY).then((value) => {
-      this.setState({restaurants: JSON.parse(value)})
-    })
+    // AsyncStorage.getItem(STORAGE_KEY).then((value) => {
+    //   this.setState({restaurants: JSON.parse(value)})
+    // })
     // Gets data based on geo coordinates
-    // navigator.geolocation.getCurrentPosition(( position) => {this.fetchData(position.coords)});
+    navigator.geolocation.getCurrentPosition(( position) => {this.fetchData(position.coords)});
   }
 
   fetchData({latitude, longitude}) {
     console.log(latitude);
-    var promise = fetch('http://agile-sands-84514.heroku.com/restaurants.json?latitude=' + latitude + '&longitude=' + longitude);
+    var promise = fetch('http://floating-hamlet-80631.heroku.com/restaurants.json?latitude=' + latitude + '&longitude=' + longitude);
     promise.then((response) => response.json()).then((restaurants) => {
-        AsyncStorage.setItem(STORAGE_KEY, restaurants);
+        // AsyncStorage.setItem(STORAGE_KEY, restaurants);
         this.setState({restaurants: restaurants });
     })
     .catch( (error) => console.log(error) )
