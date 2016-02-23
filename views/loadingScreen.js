@@ -11,11 +11,37 @@ Animated,
 
 class LoadingScreen extends Component {
 
+  componentWillMount() {
+    this._animatedValue = new Animated.Value(0);
+  }
+
+  cycleAnimation() {
+    Animated.timing(this._animatedValue, {
+      toValue: 100,
+      duration: 3000
+    }).start(() => {
+      this._animatedValue.setValue(0);
+      this.cycleAnimation();
+    });
+  }
+
+  componentDidMount() {
+    this.cycleAnimation();
+  }
+
   render() {
+    var rotationSettings = this._animatedValue.interpolate({
+      inputRange: [0, 100],
+      outputRange: ['0deg', '360deg']
+    });
+    var transform = {
+      transform: [{rotate: rotationSettings}]
+    };
+
     return (
       <View style={styles.loading}>
-          <Image
-            style={styles.loadingLogo}
+          <Animated.Image
+            style={[styles.loadingLogo, transform]}
             source={require('../thumbnails/animationLowResWhite.png')}
           />
       </View>
