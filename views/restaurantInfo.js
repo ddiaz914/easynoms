@@ -41,7 +41,7 @@ class RestaurantInfo extends Component {
           {this.renderBackButton()}
            <Image
             style={styles.logo}
-            source={require('../thumbnails/logoLowResWhite.png')}
+            source={require('../thumbnails/logohighreswhite_720.png')}
           />
           <Text style={styles.title}>{restaurant.name}</Text>
           <MapView style={styles.map}
