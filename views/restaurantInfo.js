@@ -23,7 +23,7 @@ class RestaurantInfo extends Component {
       <TouchableOpacity
         onPress={this.goBack.bind(this)}
       >
-        <Text style={styles.backButton}> {'<<<'} </Text>
+        <Text style={styles.backButton}> {'<<< Search'} </Text>
       </TouchableOpacity>)
   }
 
@@ -86,6 +86,7 @@ const styles = StyleSheet.create({
   content: {
     color: 'white',
     fontFamily: 'Hiragino Kaku Gothic ProN',
+    marginBottom: 150
   },
   map: {
     width: 350,
@@ -93,13 +94,15 @@ const styles = StyleSheet.create({
     marginBottom: 10
   },
   logo: {
-    marginTop: 10,
+    // marginTop: 10,
     marginBottom: 10,
     height: 100,
     width: 150
   },
   backButton: {
     color: 'white',
+    marginRight: 310,
+    fontWeight: 'bold',
   }
 })
 
