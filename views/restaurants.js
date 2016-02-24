@@ -43,11 +43,12 @@ class Restaurant extends Component {
     });
   }
 
-  openModal(url) {
+  openModal(index) {
     this.props.navigator.push({
       component: ImageModal,
-      url: url
-    })
+      getImage: this.getImageSrc.bind(this),
+      index: index
+    });
   }
 
   render() {
@@ -89,17 +90,17 @@ class Restaurant extends Component {
         <Animated.View style={styles.card, animatedCardStyles} {...this._panResponder.panHandlers}>
           {url1 ?
             <TouchableOpacity onPress={this.openModal.bind(this, url1)}>
-              <Image style={styles.icon} source={{uri: url1}} />
+              <Image style={styles.icon} source={{uri: this.getImageSrc(1}}/>
             </TouchableOpacity>
           : null}
           {url2 ?
             <TouchableOpacity onPress={this.openModal.bind(this, url2)}>
-              <Image style={styles.icon} source={{uri: url2}} />
+              <Image style={styles.icon} source={{uri: this.getImageSrc(2}} />
             </TouchableOpacity>
           : null}
           {url3 ?
             <TouchableOpacity onPress={this.openModal.bind(this, url3)}>
-              <Image style={styles.icon} source={{uri: url3}} />
+              <Image style={styles.icon} source={{uri: this.getImageSrc(3}} />
             </TouchableOpacity>
           : null}
         </Animated.View>
@@ -112,6 +113,11 @@ class Restaurant extends Component {
         </Animated.View>
       </View>
     )
+  }
+
+  getImageSrc(index) {
+    var remainder = index % this.props.restaurant.photos.length;
+    return(this.props.restaurant.photos[remainder]);
   }
 
   componentDidMount(){
