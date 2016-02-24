@@ -60,10 +60,8 @@ class RestaurantInfo extends Component {
               animateDrop: true,
               latitude: Number(restaurant.lat),
               longitude: Number(restaurant.lng),
-              title: restaurant.name,
-              detailCalloutView: <View>
-              <Text style={{textDecorationLine: 'underline'}} onPress={()=>{Linking.openURL("http://maps.apple.com/?daddr=" + restaurant.lat + "," + restaurant.lng)}}>Directions</Text>
-              </View>,
+              title: " ",
+              detailCalloutView: <View><Text style={styles.directions} onPress={()=>{Linking.openURL("http://maps.apple.com/?daddr=" + restaurant.lat + "," + restaurant.lng)}}>Directions</Text></View>,
             }]}
           />
           <TouchableOpacity
@@ -110,8 +108,8 @@ const styles = StyleSheet.create({
     fontFamily: 'Hiragino Kaku Gothic ProN',
   },
   map: {
-    width: 350,
-    height: 350,
+    width: 310,
+    height: 320,
     marginBottom: 10
   },
   logo: {
@@ -135,6 +133,15 @@ const styles = StyleSheet.create({
     backgroundColor: '#300030',
     padding: 7,
     borderRadius: 5,
+  },
+  directions: {
+    textDecorationLine: 'underline',
+    height: 20,
+    width: 80,
+    textAlign: 'center'
+  },
+  directionsTitle: {
+    fontSize: 0
   }
 })
 
