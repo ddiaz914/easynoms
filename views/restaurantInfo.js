@@ -66,8 +66,10 @@ class RestaurantInfo extends Component {
               title: restaurant.address,
             }]}
           />
-          {website}
-          <Text style={styles.directions} onPress={()=>{Linking.openURL("http://maps.apple.com/?daddr=" + restaurant.lat + "," + restaurant.lng)}}>Directions</Text>
+          <View style={styles.something}>
+            {website}
+            <Text style={styles.directions} onPress={()=>{Linking.openURL("http://maps.apple.com/?daddr=" + restaurant.lat + "," + restaurant.lng)}}>Directions</Text>
+          </View>
           {<TouchableOpacity onPress={()=>{Linking.openURL("tel:" + restaurant.phone)}}>
             <Text style={styles.phoneNumber}>{restaurant.phone}</Text>
           </TouchableOpacity>}
@@ -121,10 +123,12 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   websiteButton: {
+    flex: 1,
     textAlign: 'center',
     color: 'white',
     marginBottom: 2,
     marginTop: 7,
+    marginLeft: 10,
     borderWidth: 1,
     borderColor: 'white',
     backgroundColor: '#300030',
@@ -135,18 +139,24 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: 'white',
     marginBottom: 2,
-    marginTop: 2,
+    marginTop: 7,
+    marginLeft: 10,
     borderWidth: 1,
     borderColor: 'white',
     backgroundColor: '#300030',
     padding: 7,
     borderRadius: 5,
+    paddingLeft: 25,
+    paddingRight: 25
   },
   phoneNumber: {
     textDecorationLine: 'underline',
     color: 'white',
     paddingBottom: 4,
     marginTop: 4
+  },
+  something: {
+    flexDirection: 'row'
   }
 })
 
