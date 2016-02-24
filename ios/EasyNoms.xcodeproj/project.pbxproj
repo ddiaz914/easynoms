@@ -375,7 +375,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = YRMPQKGKFZ;
+						DevelopmentTeam = R66GF285Z7;
 					};
 				};
 			};
@@ -655,7 +655,7 @@
 				INFOPLIST_FILE = EasyNoms/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.EasyNom;
 				PRODUCT_NAME = EasyNoms;
 				PROVISIONING_PROFILE = "";
 			};
@@ -675,7 +675,7 @@
 				INFOPLIST_FILE = EasyNoms/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.EasyNom;
 				PRODUCT_NAME = EasyNoms;
 				PROVISIONING_PROFILE = "";
 			};
