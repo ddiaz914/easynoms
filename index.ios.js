@@ -31,36 +31,37 @@ class EasyNoms extends Component {
     super(props);
     this.state = {
       restaurants: null,
-      modalOpen: true
     }
   }
 
-  closeModal() {
-    this.state.modalOpen = !this.state.modalOpen;
+  renderRestaurant(route, navigator) {
+    if(route.index >= this.state.restaurants.length) {
+      return <EndPage/>
+    };
+    return(
+      <Restaurant
+        restaurant={this.state.restaurants[route.index]}
+        index={route.index}
+        navigator={navigator}
+      />
+    );
   }
 
   renderScene(route, navigator){
 
-    if(route.component === Restaurant){
-      if(route.index >= this.state.restaurants.length) {
+    switch(route.component) {
+      case Restaurant:
+        return this.renderRestaurant(route, navigator);
+      case ImageModal:
+        return <ImageModal navigator={navigator} uri={route.url}/>
+      case RestaurantInfo:
+        return(
+          <RestaurantInfo
+            restaurant={route.passProps.restaurant}
+            navigator={navigator}
+          /> );
+      default:
         return <EndPage/>
-      };
-      return(
-        <Restaurant
-          restaurant={this.state.restaurants[route.index]}
-          index={route.index}
-          navigator={navigator}
-          />
-      );
-    } else if(route.component === ImageModal) {
-      return <ImageModal navigator={navigator} uri={route.url}/>
-    } else {
-      return(
-        <RestaurantInfo
-          restaurant={route.passProps.restaurant}
-          navigator={navigator}
-        />
-      );
     }
   }
 
@@ -68,13 +69,6 @@ class EasyNoms extends Component {
     console.log(this.state.restaurants)
     if(!this.state.restaurants) {
       return <LoadingScreen />;
-    }
-
-    var modal = null;
-    if(this.state.modalOpen) {
-      modal = <ImageModal close={this.closeModal.bind(this)}/>;
-    } else {
-      modal = null;
     }
 
     return(
@@ -87,9 +81,20 @@ class EasyNoms extends Component {
             index: 0
           }}
           renderScene={this.renderScene.bind(this)}
+          configureScene={this.configScene.bind(this)}
         />
       </View>
     );
+  }
+
+  configScene(route, routeStack) {
+    console.log(Navigator.SceneConfigs)
+    switch(route.component) {
+      case ImageModal:
+        return Navigator.SceneConfigs.FloatFromBottom;
+      default:
+        return Navigator.SceneConfigs.FloatFromRight;
+    }
   }
 
   getRestaurant(index) {
