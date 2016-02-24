@@ -15,6 +15,7 @@ import React, {
   TextInput,
   Navigator,
   AsyncStorage,
+  TouchableOpacity,
   Image
 } from 'react-native';
 
@@ -22,14 +23,20 @@ var Restaurant = require('./views/restaurants');
 var RestaurantInfo = require('./views/restaurantInfo');
 var EndPage = require('./views/endpage');
 var LoadingScreen = require('./views/loadingScreen');
+var ImageModal = require('./views/imageModal');
 
 class EasyNoms extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      restaurants: null
+      restaurants: null,
+      modalOpen: true
     }
+  }
+
+  closeModal() {
+    this.state.modalOpen = !this.state.modalOpen;
   }
 
   renderScene(route, navigator){
@@ -45,6 +52,8 @@ class EasyNoms extends Component {
           navigator={navigator}
           />
       );
+    } else if(route.component === ImageModal) {
+      return <ImageModal navigator={navigator}/>
     } else {
       return(
         <RestaurantInfo
@@ -60,16 +69,26 @@ class EasyNoms extends Component {
     if(!this.state.restaurants) {
       return <LoadingScreen />;
     }
-    return (
-    <Navigator
-      style={styles.wrapper}
-      initialRoute={{
-        title: 'Easy Noms',
-        component: Restaurant,
-        index: 0
-      }}
-      renderScene={this.renderScene.bind(this)}
-    />
+
+    var modal = null;
+    if(this.state.modalOpen) {
+      modal = <ImageModal close={this.closeModal.bind(this)}/>;
+    } else {
+      modal = null;
+    }
+
+    return(
+      <View style={styles.wrapper}>
+        <Navigator
+          style={styles.wrapper}
+          initialRoute={{
+            title: 'Easy Noms',
+            component: Restaurant,
+            index: 0
+          }}
+          renderScene={this.renderScene.bind(this)}
+        />
+      </View>
     );
   }
 
