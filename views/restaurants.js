@@ -110,6 +110,10 @@ class Restaurant extends Component {
         <Animated.View style={[styles.yup, animatedYupStyles]}>
           <Text style={styles.yupText}>Nom Nom</Text>
         </Animated.View>
+
+        <TouchableOpacity >
+          <Text style={styles.button} onPress={this._gotToInfo.bind(this)}>Go Here!</Text>
+        </TouchableOpacity>
       </View>
     )
   }
@@ -140,7 +144,7 @@ class Restaurant extends Component {
 
         if (Math.abs(this.state.pan.x._value) > SWIPE_THRESHOLD) {
           var swipeFunction = this.state.pan.x._value > SWIPE_THRESHOLD ?
-            this._swipeRight.bind(this) :
+            this._gotToInfo.bind(this) :
             this._resetState.bind(this);
 
           Animated.decay(this.state.pan, {
@@ -164,7 +168,7 @@ class Restaurant extends Component {
     this._animateEntrance();
   }
 
-  _swipeRight() {
+  _gotToInfo() {
     var restaurant = this.props.restaurant;
     this.state.pan.setValue({x: 0, y: 0});
     this.state.enter.setValue(1);
@@ -246,6 +250,17 @@ const styles = StyleSheet.create({
     marginBottom: 50,
     height: 100,
     width: 150
+  },
+  button: {
+    textAlign: 'center',
+    color: 'white',
+    marginBottom: 7,
+    marginTop: 7,
+    borderWidth: 1,
+    borderColor: 'white',
+    backgroundColor: '#300030',
+    padding: 7,
+    borderRadius: 5,
   }
 })
 
