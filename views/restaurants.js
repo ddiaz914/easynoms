@@ -85,10 +85,12 @@ class Restaurant extends Component {
 
     return (
       <View style={styles.container} >
-          <Image
-            style={styles.logo}
-            source={require('../thumbnails/logohighreswhite_720.png')}
-          />
+            <View style={styles.logoContainer}>
+              <Image
+                    style={styles.logo}
+                    source={require('../thumbnails/logohighreswhite_720.png')}
+              />
+            </View>
         <Animated.View style={styles.card, animatedCardStyles} {...this._panResponder.panHandlers}>
             {url1 ?
               <TouchableOpacity onPress={this.openModal.bind(this, url1)}>
@@ -205,16 +207,18 @@ class Restaurant extends Component {
 
 const styles = StyleSheet.create({
   container: {
+    marginTop:20,
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#300030'
+    backgroundColor: '#300030',
   },
   content: {
+    flex: 1,
     color: 'white',
     fontSize: 25,
-    marginBottom: 20,
+    marginTop: 20,
     fontFamily: 'Hiragino Kaku Gothic ProN'
   },
   iconhor: {
@@ -233,6 +237,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   card: {
+    flex: 1,
     width: 200,
     height: 200,
     backgroundColor: 'red'
@@ -268,9 +273,19 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent'
   },
   logo: {
-    marginBottom: 50,
-    height: 100,
-    width: 150
+    marginLeft: 130,
+    marginTop: 10,
+    height: 80,
+    width: 120,
+  },
+  logoContainer: {
+    flex: 1,
+    flexDirection: 'column',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    justifyContent: 'center',
+    alignItems: 'center',
   }
 })
 
