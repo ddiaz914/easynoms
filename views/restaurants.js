@@ -195,7 +195,7 @@ const styles = StyleSheet.create({
     width: 400,
     height: 150,
     margin: 2,
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   card: {
     width: 200,
