@@ -63,13 +63,13 @@ class RestaurantInfo extends Component {
               animateDrop: true,
               latitude: Number(restaurant.lat),
               longitude: Number(restaurant.lng),
-              title: " ",
+              title: "Go now!",
               detailCalloutView: <View><Text style={styles.directions} onPress={()=>{Linking.openURL("http://maps.apple.com/?daddr=" + restaurant.lat + "," + restaurant.lng)}}>Directions</Text></View>,
             }]}
           />
           {website}
           {<TouchableOpacity onPress={()=>{Linking.openURL("tel:" + restaurant.phone)}}>
-            <Text style={styles.content}>{restaurant.phone}</Text>
+            <Text style={styles.phoneNumber}>{restaurant.phone}</Text>
           </TouchableOpacity>}
           <Text style={styles.content}>{streetAddress}</Text>
           <Text style={styles.content}>{city}, {stateAndZip}</Text>
@@ -106,9 +106,9 @@ const styles = StyleSheet.create({
     fontFamily: 'Hiragino Kaku Gothic ProN',
   },
   map: {
-    width: 310,
-    height: 320,
-    marginBottom: 10
+    width: 350,
+    height: 310,
+    marginBottom: 5,
   },
   logo: {
     // marginTop: 10,
@@ -135,11 +135,12 @@ const styles = StyleSheet.create({
   directions: {
     textDecorationLine: 'underline',
     height: 20,
-    width: 80,
-    textAlign: 'center'
+    width: 100,
   },
-  directionsTitle: {
-    fontSize: 0
+  phoneNumber: {
+    textDecorationLine: 'underline',
+    color: 'white',
+    paddingBottom: 4
   }
 })
 
