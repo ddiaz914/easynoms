@@ -96,9 +96,9 @@ const styles = StyleSheet.create({
   title: {
     color: 'white',
     fontFamily: 'Hiragino Kaku Gothic ProN',
-    marginBottom: 10,
+    marginBottom: 5,
     fontWeight: 'bold',
-    fontSize: 18,
+    fontSize: 22,
     marginTop: 10
   },
   content: {
@@ -106,9 +106,8 @@ const styles = StyleSheet.create({
     fontFamily: 'Hiragino Kaku Gothic ProN',
   },
   map: {
-    width: 350,
-    height: 310,
-    marginBottom: 5,
+    width: 330,
+    height: 280,
   },
   logo: {
     // marginTop: 10,
@@ -120,7 +119,7 @@ const styles = StyleSheet.create({
     color: 'white',
     marginRight: 310,
     fontWeight: 'bold',
-    marginTop: 20,
+    marginTop: 10,
   },
   websiteButton: {
     flex: 1,
@@ -153,7 +152,6 @@ const styles = StyleSheet.create({
     color: 'white',
     paddingBottom: 4,
     marginTop: 4,
-    marginBottom: 20,
     fontSize: 25,
     textDecorationLine: 'underline',
   },
