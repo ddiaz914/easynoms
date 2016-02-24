@@ -214,7 +214,8 @@ const styles = StyleSheet.create({
   yupText: {
     fontSize: 20,
     color: 'white',
-    fontFamily: 'Hiragino Kaku Gothic ProN'
+    fontFamily: 'Hiragino Kaku Gothic ProN',
+    backgroundColor: 'transparent'
   },
   nope: {
     borderColor: 'white',
@@ -223,12 +224,13 @@ const styles = StyleSheet.create({
     bottom: 20,
     padding: 20,
     borderRadius: 5,
-    left: 20,
+    left: 20
   },
   nopeText: {
     fontSize: 20,
     color: 'white',
-    fontFamily: 'Hiragino Kaku Gothic ProN'
+    fontFamily: 'Hiragino Kaku Gothic ProN',
+    backgroundColor: 'transparent'
   },
   logo: {
     marginBottom: 50,
