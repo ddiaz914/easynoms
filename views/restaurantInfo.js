@@ -63,7 +63,7 @@ class RestaurantInfo extends Component {
               animateDrop: true,
               latitude: Number(restaurant.lat),
               longitude: Number(restaurant.lng),
-              title: restaurant.address,
+              title: streetAddress,
             }]}
           />
           <View style={styles.something}>
