@@ -4,6 +4,7 @@ var React = require('react-native');
 const STORAGE_KEY = 'restaurantsKey';
 import clamp from 'clamp';
 var RestaurantInfo = require('./restaurantInfo');
+var ImageModal = require('./imageModal');
 
 var {
 View,
@@ -13,7 +14,8 @@ AsyncStorage,
 StyleSheet,
 Image,
 PanResponder,
-Animated
+Animated,
+TouchableOpacity
 } = React;
 
 var SWIPE_THRESHOLD = 120;
@@ -39,6 +41,13 @@ class Restaurant extends Component {
       component: Restaurant,
       index: this.props.index + 1
     });
+  }
+
+  openModal(url) {
+    this.props.navigator.push({
+      component: ImageModal,
+      url: url
+    })
   }
 
   render() {
@@ -79,18 +88,21 @@ class Restaurant extends Component {
             source={require('../thumbnails/logohighreswhite_720.png')}
           />
         <Animated.View style={styles.card, animatedCardStyles} {...this._panResponder.panHandlers}>
-          <Image
-            style={styles.icon}
-            source={{uri: url1}}
-          />
-          <Image
-            style={styles.icon}
-            source={{uri: url2}}
-          />
-          <Image
-            style={styles.icon}
-            source={{uri: url3}}
-          />
+          {url1 ?
+            <TouchableOpacity onPress={this.openModal.bind(this, url1)}>
+              <Image style={styles.icon} source={{uri: url1}} />
+            </TouchableOpacity>
+          : null}
+          {url2 ?
+            <TouchableOpacity onPress={this.openModal.bind(this, url2)}>
+              <Image style={styles.icon} source={{uri: url2}} />
+            </TouchableOpacity>
+          : null}
+          {url3 ?
+            <TouchableOpacity onPress={this.openModal.bind(this, url3)}>
+              <Image style={styles.icon} source={{uri: url3}} />
+            </TouchableOpacity>
+          : null}
         </Animated.View>
 
         <Animated.View style={[styles.nope, animatedNopeStyles]} >

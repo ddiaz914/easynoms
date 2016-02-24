@@ -15,6 +15,7 @@ import React, {
   TextInput,
   Navigator,
   AsyncStorage,
+  TouchableOpacity,
   Image
 } from 'react-native';
 
@@ -22,36 +23,45 @@ var Restaurant = require('./views/restaurants');
 var RestaurantInfo = require('./views/restaurantInfo');
 var EndPage = require('./views/endpage');
 var LoadingScreen = require('./views/loadingScreen');
+var ImageModal = require('./views/imageModal');
 
 class EasyNoms extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      restaurants: null
+      restaurants: null,
     }
+  }
+
+  renderRestaurant(route, navigator) {
+    if(route.index >= this.state.restaurants.length) {
+      return <EndPage/>
+    };
+    return(
+      <Restaurant
+        restaurant={this.state.restaurants[route.index]}
+        index={route.index}
+        navigator={navigator}
+      />
+    );
   }
 
   renderScene(route, navigator){
 
-    if(route.component === Restaurant){
-      if(route.index >= this.state.restaurants.length) {
+    switch(route.component) {
+      case Restaurant:
+        return this.renderRestaurant(route, navigator);
+      case ImageModal:
+        return <ImageModal navigator={navigator} uri={route.url}/>
+      case RestaurantInfo:
+        return(
+          <RestaurantInfo
+            restaurant={route.passProps.restaurant}
+            navigator={navigator}
+          /> );
+      default:
         return <EndPage/>
-      };
-      return(
-        <Restaurant
-          restaurant={this.state.restaurants[route.index]}
-          index={route.index}
-          navigator={navigator}
-          />
-      );
-    } else {
-      return(
-        <RestaurantInfo
-          restaurant={route.passProps.restaurant}
-          navigator={navigator}
-        />
-      );
     }
   }
 
@@ -60,17 +70,31 @@ class EasyNoms extends Component {
     if(!this.state.restaurants) {
       return <LoadingScreen />;
     }
-    return (
-    <Navigator
-      style={styles.wrapper}
-      initialRoute={{
-        title: 'Easy Noms',
-        component: Restaurant,
-        index: 0
-      }}
-      renderScene={this.renderScene.bind(this)}
-    />
+
+    return(
+      <View style={styles.wrapper}>
+        <Navigator
+          style={styles.wrapper}
+          initialRoute={{
+            title: 'Easy Noms',
+            component: Restaurant,
+            index: 0
+          }}
+          renderScene={this.renderScene.bind(this)}
+          configureScene={this.configScene.bind(this)}
+        />
+      </View>
     );
+  }
+
+  configScene(route, routeStack) {
+    console.log(Navigator.SceneConfigs)
+    switch(route.component) {
+      case ImageModal:
+        return Navigator.SceneConfigs.FloatFromBottom;
+      default:
+        return Navigator.SceneConfigs.FloatFromRight;
+    }
   }
 
   getRestaurant(index) {
@@ -93,7 +117,7 @@ class EasyNoms extends Component {
     console.log(latitude);
     var promise = fetch('http://floating-hamlet-80631.heroku.com/restaurants.json?latitude=' + latitude + '&longitude=' + longitude);
     promise.then((response) => response.json()).then((restaurants) => {
-        // AsyncStorage.setItem(STORAGE_KEY, restaurants);
+        // AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(restaurants));
         this.setState({restaurants: restaurants });
     })
     .catch( (error) => console.log(error) )
