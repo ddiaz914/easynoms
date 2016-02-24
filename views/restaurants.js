@@ -28,7 +28,7 @@ class Restaurant extends Component {
       latitude: null,
       longitude: null,
       pan: new Animated.ValueXY(),
-      enter: new Animated.Value(1)
+      enter: new Animated.Value(0.3)
     }
   }
 
@@ -114,6 +114,10 @@ class Restaurant extends Component {
     )
   }
 
+  componentDidMount(){
+    this._animateEntrance();
+  }
+
   componentWillMount() {
     this._panResponder = PanResponder.create({
       onMoveShouldSetResponderCapture: () => true,
@@ -162,6 +166,7 @@ class Restaurant extends Component {
     this.state.enter.setValue(0);
     this._goToNextRestaurant();
     this._animateEntrance();
+
   }
 
   _swipeRight() {
