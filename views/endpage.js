@@ -36,6 +36,7 @@ class EndPage extends Component {
 
 var styles = StyleSheet.create({
   container: {
+    marginTop:20,
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',

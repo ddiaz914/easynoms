@@ -191,11 +191,12 @@ class Restaurant extends Component {
 
 const styles = StyleSheet.create({
   container: {
+    marginTop:20,
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#300030'
+    backgroundColor: '#300030',
   },
   content: {
     flex: 1,
@@ -248,9 +249,9 @@ const styles = StyleSheet.create({
   },
   logo: {
     marginLeft: 130,
-    marginTop: 20,
+    marginTop: 10,
     height: 80,
-    width: 120
+    width: 120,
   },
   logoContainer: {
     flex: 1,
@@ -260,7 +261,6 @@ const styles = StyleSheet.create({
     left: 0,
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 30
   }
 })
 
