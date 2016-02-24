@@ -43,9 +43,11 @@ class Restaurant extends Component {
     });
   }
 
-  openModal() {
+  openModal(url) {
+    console.log(url)
     this.props.navigator.push({
       component: ImageModal,
+      url: url
     })
   }
 
@@ -88,13 +90,20 @@ class Restaurant extends Component {
           />
         <Animated.View style={styles.card, animatedCardStyles} {...this._panResponder.panHandlers}>
           {url1 ?
-            <TouchableOpacity onPress={this.openModal.bind(this)}>
+            <TouchableOpacity onPress={this.openModal.bind(this, url1)}>
               <Image style={styles.icon} source={{uri: url1}} />
             </TouchableOpacity>
           : null}
-          {url2 ? <Image style={styles.icon} source={{uri: url2}} /> : null}
-          {url3 ? <Image style={styles.icon} source={{uri: url3}} /> : null}
-
+          {url2 ?
+            <TouchableOpacity onPress={this.openModal.bind(this, url2)}>
+              <Image style={styles.icon} source={{uri: url2}} />
+            </TouchableOpacity>
+          : null}
+          {url3 ?
+            <TouchableOpacity onPress={this.openModal.bind(this, url3)}>
+              <Image style={styles.icon} source={{uri: url3}} />
+            </TouchableOpacity>
+          : null}
         </Animated.View>
 
         <Animated.View style={[styles.nope, animatedNopeStyles]} >

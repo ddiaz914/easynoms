@@ -11,7 +11,8 @@ var {
 } = React;
 
 var {
-  height: deviceHeight
+  height: deviceHeight,
+  width: deviceWidth
 } = Dimensions.get('window');
 
 class ImageModal extends Component {
@@ -19,7 +20,7 @@ class ImageModal extends Component {
     return(
       <View style={styles.modal}>
         <TouchableOpacity style={styles.close} onPress={() => this.close.call(this) }>
-          <Text>IMAGE MODAL</Text>
+          <Image style={styles.modalImage} source={{uri: this.props.uri}}/>
         </TouchableOpacity>
       </View>
     )
@@ -34,13 +35,15 @@ const styles = StyleSheet.create({
   modal: {
     height: deviceHeight,
     backgroundColor: 'rgba(0,0,0,0.8)',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   close: {
     alignSelf: 'center',
     backgroundColor: 'white',
     height: 40
+  },
+  modalImage: {
+    width: deviceWidth,
+    height: deviceHeight
   }
 });
 

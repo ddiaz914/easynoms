@@ -53,7 +53,7 @@ class EasyNoms extends Component {
           />
       );
     } else if(route.component === ImageModal) {
-      return <ImageModal navigator={navigator}/>
+      return <ImageModal navigator={navigator} uri={route.url}/>
     } else {
       return(
         <RestaurantInfo
