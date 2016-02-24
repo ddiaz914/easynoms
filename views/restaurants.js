@@ -44,7 +44,6 @@ class Restaurant extends Component {
   }
 
   openModal(url) {
-    console.log(url)
     this.props.navigator.push({
       component: ImageModal,
       url: url

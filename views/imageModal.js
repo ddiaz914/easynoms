@@ -17,6 +17,7 @@ var {
 
 class ImageModal extends Component {
   render() {
+    console.log(this.props.uri)
     return(
       <View style={styles.modal}>
         <TouchableOpacity style={styles.close} onPress={() => this.close.call(this) }>
@@ -33,17 +34,16 @@ class ImageModal extends Component {
 
 const styles = StyleSheet.create({
   modal: {
-    height: deviceHeight,
-    backgroundColor: 'rgba(0,0,0,0.8)',
+    backgroundColor: 'rgba(0,0,0,.8)',
+    justifyContent: 'center'
   },
   close: {
     alignSelf: 'center',
-    backgroundColor: 'white',
-    height: 40
   },
   modalImage: {
     width: deviceWidth,
-    height: deviceHeight
+    height: deviceHeight,
+    resizeMode: Image.resizeMode.contain
   }
 });
 
