@@ -54,6 +54,12 @@ class RestaurantInfo extends Component {
               latitudeDelta: DELTA,
               longitudeDelta: DELTA,
             }}
+            annotations={[{
+              animateDrop: true,
+              latitude: Number(restaurant.lat),
+              longitude: Number(restaurant.lng),
+              title: restaurant.name
+            }]}
           />
           <TouchableOpacity
             onPress={ () => { Linking.openURL(restaurant.website)}}
