@@ -35,6 +35,9 @@ class RestaurantInfo extends Component {
     var restaurant = this.props.restaurant;
     console.log(restaurant)
     if(restaurant) {
+      if(restaurant.website){
+        var website = <TouchableOpacity onPress={ () => { Linking.openURL(restaurant.website)}}><Text style={styles.websiteButton}>Go To Webpage</Text></TouchableOpacity>;
+      }
       var splitAddress=restaurant.address.split(", ");
       var streetAddress = splitAddress[0];
       var city = splitAddress[1];
@@ -66,15 +69,10 @@ class RestaurantInfo extends Component {
               </View>,
             }]}
           />
-          <TouchableOpacity
-            onPress={ () => { Linking.openURL(restaurant.website)}}
-          >
-            <Text style={styles.websiteButton}>Go To Webpage</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity onPress={()=>{Linking.openURL("tel:" + restaurant.phone)}}>
+          {website}
+          {<TouchableOpacity onPress={()=>{Linking.openURL("tel:" + restaurant.phone)}}>
             <Text style={styles.content}>{restaurant.phone}</Text>
-          </TouchableOpacity>
+          </TouchableOpacity>}
           <Text style={styles.content}>{streetAddress}</Text>
           <Text style={styles.content}>{city}, {stateAndZip}</Text>
           {this.renderBackButton()}
