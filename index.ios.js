@@ -57,6 +57,12 @@ class EasyNoms extends Component {
       route.reset = false;
     }
 
+    if(route.shouldKeep) {
+      this.state.restaurants.push(
+        this.state.restaurants[route.index - 1]
+      )
+    }
+
     if(!this.state.restaurants) {
       return <LoadingScreen />;
     }
