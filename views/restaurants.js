@@ -28,7 +28,7 @@ class Restaurant extends Component {
       latitude: null,
       longitude: null,
       pan: new Animated.ValueXY(),
-      enter: new Animated.Value(0.3)
+      enter: new Animated.Value(0.5)
     }
   }
 
@@ -71,10 +71,13 @@ class Restaurant extends Component {
 
     var currentRestaurant = this.props.restaurant;
     if (currentRestaurant) {
+      console.log(currentRestaurant);
       // console.log(this.state.restaurants); // DEBUGGING
       var url1 = currentRestaurant.photos[0];
       var url2 = currentRestaurant.photos[1];
       var url3 = currentRestaurant.photos[2];
+      var url4 = currentRestaurant.photos[3];
+      var url5 = currentRestaurant.photos[4];
     } else {
       SWIPE_THRESHOLD=1000;
     }
@@ -87,23 +90,31 @@ class Restaurant extends Component {
             source={require('../thumbnails/logohighreswhite_720.png')}
           />
         <Animated.View style={styles.card, animatedCardStyles} {...this._panResponder.panHandlers}>
-          {url1 ?
-            <TouchableOpacity onPress={this.openModal.bind(this, url1)}>
-              <Image style={styles.icon} source={{uri: url1}} />
-            </TouchableOpacity>
-          : null}
-          {url2 ?
-            <TouchableOpacity onPress={this.openModal.bind(this, url2)}>
-              <Image style={styles.icon} source={{uri: url2}} />
-            </TouchableOpacity>
-          : null}
-          {url3 ?
-            <TouchableOpacity onPress={this.openModal.bind(this, url3)}>
-              <Image style={styles.icon} source={{uri: url3}} />
-            </TouchableOpacity>
-          : null}
+            {url1 ?
+              <TouchableOpacity onPress={this.openModal.bind(this, url1)}>
+                <Image style={styles.iconhor} source={{uri: url1}} />
+              </TouchableOpacity>
+            : null}
+          <Animated.View style={styles.card, animatedCardStyles, styles.squareView} {...this._panResponder.panHandlers}>
+            {currentRestaurant.photos.length > 2 ?
+              <TouchableOpacity onPress={this.openModal.bind(this, url2)}>
+                <Image style={styles.iconver} source={{uri: url2}} />
+              </TouchableOpacity> : <TouchableOpacity onPress={this.openModal.bind(this, url2)}>
+                <Image style={styles.iconhor} source={{uri: url2}} />
+              </TouchableOpacity>
+            }
+            {url3 ?
+              <TouchableOpacity onPress={this.openModal.bind(this, url3)}>
+                <Image style={styles.iconver} source={{uri: url3}} />
+              </TouchableOpacity>
+            : null}
+          </Animated.View>
+            {url4 ?
+              <TouchableOpacity onPress={this.openModal.bind(this, url4)}>
+              <Image style={styles.iconhor} source={{uri: url4}} />
+              </TouchableOpacity>
+              : null}
         </Animated.View>
-
         <Animated.View style={[styles.nope, animatedNopeStyles]} >
           <Text style={styles.nopeText}>No No</Text>
         </Animated.View>
@@ -206,11 +217,20 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     fontFamily: 'Hiragino Kaku Gothic ProN'
   },
-  icon: {
+  iconhor: {
     width: 400,
     height: 150,
     margin: 2,
     justifyContent: 'center',
+  },
+  iconver: {
+    width: 200,
+    height: 150,
+    margin: 2,
+    justifyContent: 'center',
+  },
+  squareView:{
+    flexDirection: 'row'
   },
   card: {
     width: 200,
