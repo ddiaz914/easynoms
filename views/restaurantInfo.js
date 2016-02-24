@@ -58,7 +58,10 @@ class RestaurantInfo extends Component {
               animateDrop: true,
               latitude: Number(restaurant.lat),
               longitude: Number(restaurant.lng),
-              title: restaurant.name
+              title: restaurant.name,
+              onFocus: ()=>{
+                return (Linking.openURL("http://maps.apple.com/?daddr=" + restaurant.lat + "," + restaurant.lng));
+              }
             }]}
           />
           <TouchableOpacity
@@ -70,8 +73,10 @@ class RestaurantInfo extends Component {
           <TouchableOpacity onPress={()=>{Linking.openURL("tel:" + restaurant.phone)}}>
             <Text style={styles.content}>{restaurant.phone}</Text>
           </TouchableOpacity>
-          <Text style={styles.content}>{streetAddress}</Text>
-          <Text style={styles.content}>{city}, {stateAndZip}</Text>
+          <TouchableOpacity onPress={()=>{Linking.openURL("http://maps.apple.com/?daddr=" + restaurant.lat + "," + restaurant.lng)}}>
+            <Text style={styles.content}>{streetAddress}</Text>
+            <Text style={styles.content}>{city}, {stateAndZip}</Text>
+          </TouchableOpacity>
           {this.renderBackButton()}
         </View>);
     } else {
