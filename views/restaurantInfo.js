@@ -63,15 +63,13 @@ class RestaurantInfo extends Component {
               animateDrop: true,
               latitude: Number(restaurant.lat),
               longitude: Number(restaurant.lng),
-              title: restaurant.name,
-              detailCalloutView: <View>
-              <Text style={{textDecorationLine: 'underline'}} onPress={()=>{Linking.openURL("http://maps.apple.com/?daddr=" + restaurant.lat + "," + restaurant.lng)}}>Directions</Text>
-              </View>,
+              title: "Go now!",
+              detailCalloutView: <View><Text style={styles.directions} onPress={()=>{Linking.openURL("http://maps.apple.com/?daddr=" + restaurant.lat + "," + restaurant.lng)}}>Directions</Text></View>,
             }]}
           />
           {website}
           {<TouchableOpacity onPress={()=>{Linking.openURL("tel:" + restaurant.phone)}}>
-            <Text style={styles.content}>{restaurant.phone}</Text>
+            <Text style={styles.phoneNumber}>{restaurant.phone}</Text>
           </TouchableOpacity>}
           <Text style={styles.content}>{streetAddress}</Text>
           <Text style={styles.content}>{city}, {stateAndZip}</Text>
@@ -109,8 +107,8 @@ const styles = StyleSheet.create({
   },
   map: {
     width: 350,
-    height: 350,
-    marginBottom: 10
+    height: 310,
+    marginBottom: 5,
   },
   logo: {
     // marginTop: 10,
@@ -133,6 +131,16 @@ const styles = StyleSheet.create({
     backgroundColor: '#300030',
     padding: 7,
     borderRadius: 5,
+  },
+  directions: {
+    textDecorationLine: 'underline',
+    height: 20,
+    width: 100,
+  },
+  phoneNumber: {
+    textDecorationLine: 'underline',
+    color: 'white',
+    paddingBottom: 4
   }
 })
 
