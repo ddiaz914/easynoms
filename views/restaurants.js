@@ -34,14 +34,6 @@ class Restaurant extends Component {
 
 
 
-  _goToNextRestaurant() {
-    var restaurant = this.props.restaurant;
-    this.props.navigator.replace({
-      title: restaurant.name,
-      component: Restaurant,
-      index: this.props.index + 1
-    });
-  }
 
   openModal(url) {
     this.props.navigator.push({
@@ -144,8 +136,8 @@ class Restaurant extends Component {
 
         if (Math.abs(this.state.pan.x._value) > SWIPE_THRESHOLD) {
           var swipeFunction = this.state.pan.x._value > SWIPE_THRESHOLD ?
-            this._gotToInfo.bind(this) :
-            this._resetState.bind(this);
+            this._swipeRight.bind(this) :
+            this._swipeLeft.bind(this);  // swipe left
 
           Animated.decay(this.state.pan, {
             velocity: {x: velocity, y: vy},
@@ -161,10 +153,28 @@ class Restaurant extends Component {
     })
   }
 
-  _resetState() {
+  _swipeRight() {
+    this._resetState(true);
+  }
+
+  _swipeLeft() {
+    this._resetState(false);
+  }
+
+  _goToNextRestaurant(keep) {
+    var restaurant = this.props.restaurant;
+    this.props.navigator.replace({
+      title: restaurant.name,
+      component: Restaurant,
+      index: this.props.index + 1,
+      shouldKeep: keep
+    });
+  }
+
+  _resetState(keep) {
     this.state.pan.setValue({x: 0, y: 0});
     this.state.enter.setValue(0);
-    this._goToNextRestaurant();
+    this._goToNextRestaurant(keep);
     this._animateEntrance();
   }
 
