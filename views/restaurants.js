@@ -85,7 +85,7 @@ class Restaurant extends Component {
       <View style={styles.container} >
           <Image
             style={styles.logo}
-            source={require('../thumbnails/logoLowResWhite.png')}
+            source={require('../thumbnails/logohighreswhite_720.png')}
           />
         <Animated.View style={styles.card, animatedCardStyles} {...this._panResponder.panHandlers}>
           {url1 ?
@@ -207,7 +207,7 @@ const styles = StyleSheet.create({
     width: 400,
     height: 150,
     margin: 2,
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   card: {
     width: 200,
@@ -226,7 +226,8 @@ const styles = StyleSheet.create({
   yupText: {
     fontSize: 20,
     color: 'white',
-    fontFamily: 'Hiragino Kaku Gothic ProN'
+    fontFamily: 'Hiragino Kaku Gothic ProN',
+    backgroundColor: 'transparent'
   },
   nope: {
     borderColor: 'white',
@@ -235,12 +236,13 @@ const styles = StyleSheet.create({
     bottom: 20,
     padding: 20,
     borderRadius: 5,
-    left: 20,
+    left: 20
   },
   nopeText: {
     fontSize: 20,
     color: 'white',
-    fontFamily: 'Hiragino Kaku Gothic ProN'
+    fontFamily: 'Hiragino Kaku Gothic ProN',
+    backgroundColor: 'transparent'
   },
   logo: {
     marginBottom: 50,

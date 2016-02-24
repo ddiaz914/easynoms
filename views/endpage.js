@@ -14,7 +14,10 @@ class EndPage extends Component {
   render(){
     return (
       <View style={styles.container}>
-        <Image source={require('../thumbnails/logoLowResWhite.png')} />
+        <Image
+            style={styles.logo}
+            source={require('../thumbnails/logohighreswhite_720.png')}
+          />
         <Text style={styles.content}>Are you serious?</Text>
         <Text style={styles.content}>Well thats it bro.</Text>
         <Text style={styles.content}>Thats all I got.</Text>
@@ -35,6 +38,10 @@ var styles = StyleSheet.create({
     color: 'white',
     fontSize: 25,
     fontFamily: 'Hiragino Kaku Gothic ProN'
+  },
+  logo: {
+    height: 300,
+    width: 350
   }
 });
 
