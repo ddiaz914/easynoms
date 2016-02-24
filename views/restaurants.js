@@ -89,18 +89,18 @@ class Restaurant extends Component {
           />
         <Animated.View style={styles.card, animatedCardStyles} {...this._panResponder.panHandlers}>
           {url1 ?
-            <TouchableOpacity onPress={this.openModal.bind(this, url1)}>
-              <Image style={styles.icon} source={{uri: this.getImageSrc(1}}/>
+            <TouchableOpacity onPress={this.openModal.bind(this, 1)}>
+              <Image style={styles.icon} source={{uri: this.getImageSrc(1)}}/>
             </TouchableOpacity>
           : null}
           {url2 ?
-            <TouchableOpacity onPress={this.openModal.bind(this, url2)}>
-              <Image style={styles.icon} source={{uri: this.getImageSrc(2}} />
+            <TouchableOpacity onPress={this.openModal.bind(this, 2)}>
+              <Image style={styles.icon} source={{uri: this.getImageSrc(2)}} />
             </TouchableOpacity>
           : null}
           {url3 ?
-            <TouchableOpacity onPress={this.openModal.bind(this, url3)}>
-              <Image style={styles.icon} source={{uri: this.getImageSrc(3}} />
+            <TouchableOpacity onPress={this.openModal.bind(this, 3)}>
+              <Image style={styles.icon} source={{uri: this.getImageSrc(3)}} />
             </TouchableOpacity>
           : null}
         </Animated.View>
