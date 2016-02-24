@@ -7,7 +7,8 @@ var {
   Text,
   StyleSheet,
   Component,
-  Image
+  Image,
+  TouchableHighlight
 } = React;
 
 class EndPage extends Component {
@@ -18,12 +19,19 @@ class EndPage extends Component {
             style={styles.logo}
             source={require('../thumbnails/logohighreswhite_720.png')}
           />
-        <Text style={styles.content}>Are you serious?</Text>
-        <Text style={styles.content}>Well thats it bro.</Text>
-        <Text style={styles.content}>Thats all I got.</Text>
+        <TouchableHighlight style={styles.refreshButton} underlayColor={'rgba(255,255,255,.8)'}
+          onPress={this.resend.bind(this)}>
+          <Text style={styles.buttonText}>Try again with current location</Text>
+        </TouchableHighlight>
       </View>
     );
   };
+
+  resend() {
+    this.props.navigator.replace({
+      reset: true
+    });
+  }
 }
 
 var styles = StyleSheet.create({
@@ -42,6 +50,18 @@ var styles = StyleSheet.create({
   logo: {
     height: 300,
     width: 350
+  },
+  refreshButton: {
+    borderColor: 'white',
+    marginBottom: 7,
+    marginTop: 7,
+    borderWidth: 1,
+    backgroundColor: '#300030',
+    padding: 7,
+    borderRadius: 5,
+  },
+  buttonText: {
+    color: 'white'
   }
 });
 

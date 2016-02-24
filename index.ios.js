@@ -36,7 +36,7 @@ class EasyNoms extends Component {
 
   renderRestaurant(route, navigator) {
     if(route.index >= this.state.restaurants.length) {
-      return <EndPage/>
+      return <EndPage navigator={navigator}/>
     };
     return(
       <Restaurant
@@ -48,6 +48,18 @@ class EasyNoms extends Component {
   }
 
   renderScene(route, navigator){
+
+    if(route.reset) {
+      this.state.restaurants = null;
+      this.getDataForCurrLocation();
+      route.component = Restaurant;
+      route.index = 0;
+      route.reset = false;
+    }
+
+    if(!this.state.restaurants) {
+      return <LoadingScreen />;
+    }
 
     switch(route.component) {
       case Restaurant:
@@ -61,16 +73,11 @@ class EasyNoms extends Component {
             navigator={navigator}
           /> );
       default:
-        return <EndPage/>
+        return <EndPage navigator={navigator}/>
     }
   }
 
   render() {
-    console.log(this.state.restaurants)
-    if(!this.state.restaurants) {
-      return <LoadingScreen />;
-    }
-
     return(
       <View style={styles.wrapper}>
         <Navigator
@@ -88,7 +95,6 @@ class EasyNoms extends Component {
   }
 
   configScene(route, routeStack) {
-    console.log(Navigator.SceneConfigs)
     switch(route.component) {
       case ImageModal:
         return Navigator.SceneConfigs.FloatFromBottom;
@@ -110,11 +116,14 @@ class EasyNoms extends Component {
     //   this.setState({restaurants: JSON.parse(value)})
     // })
     // Gets data based on geo coordinates
+    this.getDataForCurrLocation();
+  }
+
+  getDataForCurrLocation() {
     navigator.geolocation.getCurrentPosition(( position) => {this.fetchData(position.coords)});
   }
 
   fetchData({latitude, longitude}) {
-    console.log(latitude);
     var promise = fetch('http://floating-hamlet-80631.heroku.com/restaurants.json?latitude=' + latitude + '&longitude=' + longitude);
     promise.then((response) => response.json()).then((restaurants) => {
         // AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(restaurants));

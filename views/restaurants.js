@@ -70,7 +70,6 @@ class Restaurant extends Component {
     let animatedNopeStyles = {transform: [{scale: nopeScale}], opacity: nopeOpacity}
 
     var currentRestaurant = this.props.restaurant;
-    console.log(currentRestaurant);
     if (currentRestaurant) {
       // console.log(this.state.restaurants); // DEBUGGING
       var url1 = currentRestaurant.photos[0];
@@ -159,7 +158,6 @@ class Restaurant extends Component {
   }
 
   _resetState() {
-    console.log(this)
     this.state.pan.setValue({x: 0, y: 0});
     this.state.enter.setValue(0);
     this._goToNextRestaurant();
