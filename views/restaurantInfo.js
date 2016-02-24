@@ -35,7 +35,10 @@ class RestaurantInfo extends Component {
     var restaurant = this.props.restaurant;
     console.log(restaurant)
     if(restaurant) {
-
+      var splitAddress=restaurant.address.split(", ");
+      var streetAddress = splitAddress[0];
+      var city = splitAddress[1];
+      var stateAndZip = splitAddress[2];
       var content = (
         <View style={styles.container}>
            <Image
@@ -57,6 +60,12 @@ class RestaurantInfo extends Component {
           >
             <Text style={styles.websiteButton}>Go To Webpage</Text>
           </TouchableOpacity>
+
+          <TouchableOpacity onPress={()=>{Linking.openURL("tel:" + restaurant.phone)}}>
+            <Text style={styles.content}>{restaurant.phone}</Text>
+          </TouchableOpacity>
+          <Text style={styles.content}>{streetAddress}</Text>
+          <Text style={styles.content}>{city}, {stateAndZip}</Text>
           {this.renderBackButton()}
         </View>);
     } else {
@@ -88,7 +97,6 @@ const styles = StyleSheet.create({
   content: {
     color: 'white',
     fontFamily: 'Hiragino Kaku Gothic ProN',
-    marginBottom: 80
   },
   map: {
     width: 350,
