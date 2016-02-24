@@ -73,7 +73,6 @@ class RestaurantInfo extends Component {
           {<TouchableOpacity onPress={()=>{Linking.openURL("tel:" + restaurant.phone)}}>
             <Text style={styles.phoneNumber}>{restaurant.phone}</Text>
           </TouchableOpacity>}
-          <Text style={styles.content}>{city}, {stateAndZip}</Text>
           {this.renderBackButton()}
         </View>);
     } else {
@@ -121,6 +120,7 @@ const styles = StyleSheet.create({
     color: 'white',
     marginRight: 310,
     fontWeight: 'bold',
+    marginTop: 20,
   },
   websiteButton: {
     flex: 1,
@@ -150,13 +150,17 @@ const styles = StyleSheet.create({
     paddingRight: 25
   },
   phoneNumber: {
-    textDecorationLine: 'underline',
     color: 'white',
     paddingBottom: 4,
-    marginTop: 4
+    marginTop: 4,
+    marginBottom: 20,
+    fontSize: 25,
+    textDecorationLine: 'underline',
   },
   something: {
-    flexDirection: 'row'
+    flexDirection: 'row',
+    marginTop: 20,
+    marginBottom: 20,
   }
 })
 
