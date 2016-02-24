@@ -46,7 +46,8 @@ class RestaurantInfo extends Component {
             source={require('../thumbnails/logohighreswhite_720.png')}
           />
           <Text style={styles.title}>{restaurant.name}</Text>
-          <MapView style={styles.map}
+          <MapView
+            style={styles.map}
             showUserLocation={true}
             region={{
               latitude: Number(restaurant.lat),
@@ -54,14 +55,15 @@ class RestaurantInfo extends Component {
               latitudeDelta: DELTA,
               longitudeDelta: DELTA,
             }}
+            onPress={ () => { Linking.openURL("http://maps.apple.com/?daddr=" + restaurant.lat + "," + restaurant.lng)}}
             annotations={[{
               animateDrop: true,
               latitude: Number(restaurant.lat),
               longitude: Number(restaurant.lng),
               title: restaurant.name,
-              onFocus: ()=>{
-                return (Linking.openURL("http://maps.apple.com/?daddr=" + restaurant.lat + "," + restaurant.lng));
-              }
+              detailCalloutView: <View>
+              <Text style={{textDecorationLine: 'underline'}} onPress={()=>{Linking.openURL("http://maps.apple.com/?daddr=" + restaurant.lat + "," + restaurant.lng)}}>Directions</Text>
+              </View>,
             }]}
           />
           <TouchableOpacity
@@ -73,10 +75,8 @@ class RestaurantInfo extends Component {
           <TouchableOpacity onPress={()=>{Linking.openURL("tel:" + restaurant.phone)}}>
             <Text style={styles.content}>{restaurant.phone}</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={()=>{Linking.openURL("http://maps.apple.com/?daddr=" + restaurant.lat + "," + restaurant.lng)}}>
-            <Text style={styles.content}>{streetAddress}</Text>
-            <Text style={styles.content}>{city}, {stateAndZip}</Text>
-          </TouchableOpacity>
+          <Text style={styles.content}>{streetAddress}</Text>
+          <Text style={styles.content}>{city}, {stateAndZip}</Text>
           {this.renderBackButton()}
         </View>);
     } else {
