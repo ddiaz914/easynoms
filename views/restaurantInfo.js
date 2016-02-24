@@ -46,7 +46,8 @@ class RestaurantInfo extends Component {
             source={require('../thumbnails/logohighreswhite_720.png')}
           />
           <Text style={styles.title}>{restaurant.name}</Text>
-          <MapView style={styles.map}
+          <MapView
+            style={styles.map}
             showUserLocation={true}
             region={{
               latitude: Number(restaurant.lat),
@@ -54,11 +55,15 @@ class RestaurantInfo extends Component {
               latitudeDelta: DELTA,
               longitudeDelta: DELTA,
             }}
+            onPress={ () => { Linking.openURL("http://maps.apple.com/?daddr=" + restaurant.lat + "," + restaurant.lng)}}
             annotations={[{
               animateDrop: true,
               latitude: Number(restaurant.lat),
               longitude: Number(restaurant.lng),
-              title: restaurant.name
+              title: restaurant.name,
+              detailCalloutView: <View>
+              <Text style={{textDecorationLine: 'underline'}} onPress={()=>{Linking.openURL("http://maps.apple.com/?daddr=" + restaurant.lat + "," + restaurant.lng)}}>Directions</Text>
+              </View>,
             }]}
           />
           <TouchableOpacity
