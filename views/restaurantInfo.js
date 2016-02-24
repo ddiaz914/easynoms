@@ -41,7 +41,6 @@ class RestaurantInfo extends Component {
       var stateAndZip = splitAddress[2];
       var content = (
         <View style={styles.container}>
-          {this.renderBackButton()}
            <Image
             style={styles.logo}
             source={require('../thumbnails/logohighreswhite_720.png')}
@@ -59,13 +58,15 @@ class RestaurantInfo extends Component {
           <TouchableOpacity
             onPress={ () => { Linking.openURL(restaurant.website)}}
           >
-            <Text style={styles.content}>Go To Webpage</Text>
+            <Text style={styles.websiteButton}>Go To Webpage</Text>
           </TouchableOpacity>
+
           <TouchableOpacity onPress={()=>{Linking.openURL("tel:" + restaurant.phone)}}>
             <Text style={styles.content}>{restaurant.phone}</Text>
           </TouchableOpacity>
           <Text style={styles.content}>{streetAddress}</Text>
           <Text style={styles.content}>{city}, {stateAndZip}</Text>
+          {this.renderBackButton()}
         </View>);
     } else {
       var content = 'NOTHING';
@@ -89,6 +90,8 @@ const styles = StyleSheet.create({
     color: 'white',
     fontFamily: 'Hiragino Kaku Gothic ProN',
     marginBottom: 10,
+    fontWeight: 'bold',
+    fontSize: 18,
     marginTop: 10
   },
   content: {
@@ -110,6 +113,17 @@ const styles = StyleSheet.create({
     color: 'white',
     marginRight: 310,
     fontWeight: 'bold',
+  },
+  websiteButton: {
+    textAlign: 'center',
+    color: 'white',
+    marginBottom: 7,
+    marginTop: 7,
+    borderWidth: 1,
+    borderColor: 'white',
+    backgroundColor: '#300030',
+    padding: 7,
+    borderRadius: 5,
   }
 })
 
