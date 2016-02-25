@@ -91,7 +91,7 @@ class Restaurant extends Component {
                     source={require('../thumbnails/logohighreswhite_720.png')}
               />
             </View>
-            <View style={styles.blah}>
+            <View style={styles.headerMargins}>
         <Animated.View style={styles.card, animatedCardStyles} {...this._panResponder.panHandlers}>
             {url1 ?
               <TouchableOpacity onPress={this.openModal.bind(this, url1)}>
@@ -289,7 +289,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  blah: {
+  headerMargins: {
     marginTop: 50,
   }
 })
