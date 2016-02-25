@@ -68,6 +68,13 @@ class Restaurant extends Component {
     let nopeOpacity = pan.x.interpolate({inputRange: [-150, 0], outputRange: [1, 0]});
     let nopeScale = pan.x.interpolate({inputRange: [-150, 0], outputRange: [1, 0.5], extrapolate: 'clamp'});
     let animatedNopeStyles = {transform: [{scale: nopeScale}], opacity: nopeOpacity}
+    if(this.props.index === 0){
+      var leftText = <Text style={styles.leftText}>Remove restaurant</Text>;
+      var rightText = <Text style={styles.rightText}>Go to restaurant</Text>;
+      var leftArrow = <Image style={styles.leftArrow} source={require('../thumbnails/leftArrow.png')}/>
+      var rightArrow = <Image style={styles.rightArrow} source={require('../thumbnails/rightArrow.png')}/>
+    }
+
 
     var currentRestaurant = this.props.restaurant;
     if (currentRestaurant) {
@@ -85,6 +92,10 @@ class Restaurant extends Component {
 
     return (
       <View style={styles.container} >
+            {leftText}
+            {rightText}
+            {leftArrow}
+            {rightArrow}
             <View style={styles.logoContainer}>
               <Image
                     style={styles.logo}
@@ -291,7 +302,19 @@ const styles = StyleSheet.create({
   },
   headerMargins: {
     marginTop: 50,
-  }
+  },
+  leftArrow{
+
+  },
+  rightArrow{
+
+  },
+  leftText{
+
+  },
+  rightText{
+
+  },
 })
 
 
