@@ -69,11 +69,14 @@ class Restaurant extends Component {
     let nopeScale = pan.x.interpolate({inputRange: [-150, 0], outputRange: [1, 0.5], extrapolate: 'clamp'});
     let animatedNopeStyles = {transform: [{scale: nopeScale}], opacity: nopeOpacity}
     if(this.props.index === 0){
-      var leftText = <Text style={styles.leftText}>Remove restaurant</Text>;
-      var rightText = <Text style={styles.rightText}>Go to restaurant</Text>;
-      var leftArrow = <Image style={styles.leftArrow} source={require('../thumbnails/leftArrow.png')}/>
-      var rightArrow = <Image style={styles.rightArrow} source={require('../thumbnails/rightArrow.png')}/>
-    }
+      var leftArrow =     <Image style={styles.leftArrow} source={require('../thumbnails/leftArrow.png')}/>;
+      var leftText =      <Text style={styles.leftText}>Remove restaurant</Text>;
+      var logo =          <Image style={styles.logoTutorial} source={require('../thumbnails/logohighreswhite_720.png')}/>;
+      var rightText =     <Text style={styles.rightText}>Go to restaurant</Text>;
+      var rightArrow =    <Image style={styles.rightArrow} source={require('../thumbnails/rightArrow.png')}/>;
+     } else{
+       var logo = <Image style={styles.logo} source={require('../thumbnails/logohighreswhite_720.png')}/>;
+     }
 
 
     var currentRestaurant = this.props.restaurant;
@@ -92,17 +95,14 @@ class Restaurant extends Component {
 
     return (
       <View style={styles.container} >
-            {leftText}
-            {rightText}
-            {leftArrow}
-            {rightArrow}
-            <View style={styles.logoContainer}>
-              <Image
-                    style={styles.logo}
-                    source={require('../thumbnails/logohighreswhite_720.png')}
-              />
-            </View>
-            <View style={styles.headerMargins}>
+        <View style={styles.logoContainer}>
+          {leftArrow}
+          {leftText}
+          {logo}
+          {rightText}
+          {rightArrow}
+        </View>
+        <View style={styles.headerMargins}>
         <Animated.View style={styles.card, animatedCardStyles} {...this._panResponder.panHandlers}>
             {url1 ?
               <TouchableOpacity onPress={this.openModal.bind(this, url1)}>
@@ -286,7 +286,14 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent'
   },
   logo: {
-    marginLeft: 130,
+    marginLeft: 155,
+    marginTop: 20,
+    height: 80,
+    width: 120,
+  },
+  logoTutorial: {
+    marginLeft: 2,
+    marginRight: 2,
     marginTop: 20,
     height: 80,
     width: 120,
@@ -294,6 +301,7 @@ const styles = StyleSheet.create({
   logoContainer: {
     flex: 1,
     flexDirection: 'column',
+    flexDirection: 'row',
     position: 'absolute',
     top: 0,
     left: 0,
@@ -303,18 +311,22 @@ const styles = StyleSheet.create({
   headerMargins: {
     marginTop: 50,
   },
-  leftArrow{
-
+  leftArrow: {
+    height: 19.125,
+    width: 23,
+    margin: 4,
   },
-  rightArrow{
-
+  leftText: {
+    color: 'white',
   },
-  leftText{
-
+  rightArrow: {
+    height: 19.125,
+    width: 23,
+    margin: 4,
   },
-  rightText{
-
-  },
+  rightText: {
+    color: 'white',
+  }
 })
 
 
