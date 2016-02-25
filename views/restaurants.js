@@ -89,26 +89,26 @@ class Restaurant extends Component {
             <View style={styles.headerMargins}>
         <Animated.View style={styles.card, animatedCardStyles} {...this._panResponder.panHandlers}>
             {url1 ?
-              <TouchableOpacity onPress={this.openModal.bind(this, 1)}>
+              <TouchableOpacity onPress={this.openModal.bind(this, 0)}>
                 <Image style={styles.iconhor} source={{uri: url1}} />
               </TouchableOpacity>
             : null}
           <Animated.View style={styles.card, animatedCardStyles, styles.squareView} {...this._panResponder.panHandlers}>
             {currentRestaurant.photos.length > 2 ?
-              <TouchableOpacity onPress={this.openModal.bind(this, 2)}>
+              <TouchableOpacity onPress={this.openModal.bind(this, 1)}>
                 <Image style={styles.iconver} source={{uri: url2}} />
               </TouchableOpacity> : <TouchableOpacity onPress={this.openModal.bind(this, url2)}>
                 <Image style={styles.iconhor} source={{uri: url2}} />
               </TouchableOpacity>
             }
             {url3 ?
-              <TouchableOpacity onPress={this.openModal.bind(this, 3)}>
+              <TouchableOpacity onPress={this.openModal.bind(this, 2)}>
                 <Image style={styles.iconver} source={{uri: url3}} />
               </TouchableOpacity>
             : null}
           </Animated.View>
             {url4 ?
-              <TouchableOpacity onPress={this.openModal.bind(this, 4)}>
+              <TouchableOpacity onPress={this.openModal.bind(this, 3)}>
               <Image style={styles.iconhor} source={{uri: url4}} />
               </TouchableOpacity>
               : null}
