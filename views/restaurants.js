@@ -285,14 +285,14 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent'
   },
   logo: {
-    marginLeft: 155,
+    marginLeft: 133,
     marginTop: 20,
     height: 80,
     width: 120,
   },
   logoTutorial: {
-    marginLeft: 2,
-    marginRight: 2,
+    marginLeft: 7,
+    marginRight: 7,
     marginTop: 20,
     height: 80,
     width: 120,
@@ -313,18 +313,20 @@ const styles = StyleSheet.create({
   leftArrow: {
     height: 19.125,
     width: 23,
-    margin: 4,
+    margin: 6,
   },
   leftText: {
     color: 'white',
+    fontSize: 10,
   },
   rightArrow: {
     height: 19.125,
     width: 23,
-    margin: 4,
+    margin: 6,
   },
   rightText: {
     color: 'white',
+    fontSize: 10,
   }
 })
 
