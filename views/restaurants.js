@@ -308,7 +308,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   headerMargins: {
-    marginTop: 50,
+    marginTop: 115,
   },
   leftArrow: {
     height: 19.125,
@@ -325,7 +325,6 @@ const styles = StyleSheet.create({
   },
   rightText: {
     color: 'white',
-    marginTop: 115,
   }
 })
 
