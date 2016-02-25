@@ -299,7 +299,6 @@ const styles = StyleSheet.create({
   },
   logoContainer: {
     flex: 1,
-    flexDirection: 'column',
     flexDirection: 'row',
     position: 'absolute',
     top: 0,
