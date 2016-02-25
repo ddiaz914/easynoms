@@ -66,7 +66,7 @@ class RestaurantInfo extends Component {
               title: streetAddress,
             }]}
           />
-          <View style={styles.something}>
+          <View style={styles.websiteContainer}>
             {website}
             <Text style={styles.directions} onPress={()=>{Linking.openURL("http://maps.apple.com/?daddr=" + restaurant.lat + "," + restaurant.lng)}}>Directions</Text>
           </View>
@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
     fontSize: 25,
     textDecorationLine: 'underline',
   },
-  something: {
+  websiteContainer: {
     flexDirection: 'row',
     marginTop: 20,
     marginBottom: 20,
