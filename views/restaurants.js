@@ -91,6 +91,7 @@ class Restaurant extends Component {
                     source={require('../thumbnails/logohighreswhite_720.png')}
               />
             </View>
+            <View style={styles.blah}>
         <Animated.View style={styles.card, animatedCardStyles} {...this._panResponder.panHandlers}>
             {url1 ?
               <TouchableOpacity onPress={this.openModal.bind(this, url1)}>
@@ -123,6 +124,7 @@ class Restaurant extends Component {
         <Animated.View style={[styles.yup, animatedYupStyles]}>
           <Text style={styles.yupText}>Nom Nom</Text>
         </Animated.View>
+        </View>
       </View>
     )
   }
@@ -274,7 +276,7 @@ const styles = StyleSheet.create({
   },
   logo: {
     marginLeft: 130,
-    marginTop: 10,
+    marginTop: 20,
     height: 80,
     width: 120,
   },
@@ -286,6 +288,9 @@ const styles = StyleSheet.create({
     left: 0,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  blah: {
+    marginTop: 50,
   }
 })
 
