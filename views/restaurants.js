@@ -28,7 +28,7 @@ class Restaurant extends Component {
       latitude: null,
       longitude: null,
       pan: new Animated.ValueXY(),
-      enter: new Animated.Value(0.3)
+      enter: new Animated.Value(0.5)
     }
   }
 
@@ -72,10 +72,7 @@ class Restaurant extends Component {
 
     var currentRestaurant = this.props.restaurant;
     if (currentRestaurant) {
-      // console.log(this.state.restaurants); // DEBUGGING
-      var url1 = currentRestaurant.photos[0];
-      var url2 = currentRestaurant.photos[1];
-      var url3 = currentRestaurant.photos[2];
+      var [url1, url2, url3, url4, url5] = currentRestaurant.photos;
     } else {
       SWIPE_THRESHOLD=1000;
     }
@@ -83,41 +80,53 @@ class Restaurant extends Component {
 
     return (
       <View style={styles.container} >
-          <Image
-            style={styles.logo}
-            source={require('../thumbnails/logohighreswhite_720.png')}
-          />
+            <View style={styles.logoContainer}>
+              <Image
+                    style={styles.logo}
+                    source={require('../thumbnails/logohighreswhite_720.png')}
+              />
+            </View>
+            <View style={styles.headerMargins}>
         <Animated.View style={styles.card, animatedCardStyles} {...this._panResponder.panHandlers}>
-          {url1 ?
-            <TouchableOpacity onPress={this.openModal.bind(this, 1)}>
-              <Image style={styles.icon} source={{uri: this.getImageSrc(1)}}/>
-            </TouchableOpacity>
-          : null}
-          {url2 ?
-            <TouchableOpacity onPress={this.openModal.bind(this, 2)}>
-              <Image style={styles.icon} source={{uri: this.getImageSrc(2)}} />
-            </TouchableOpacity>
-          : null}
-          {url3 ?
-            <TouchableOpacity onPress={this.openModal.bind(this, 3)}>
-              <Image style={styles.icon} source={{uri: this.getImageSrc(3)}} />
-            </TouchableOpacity>
-          : null}
+            {url1 ?
+              <TouchableOpacity onPress={this.openModal.bind(this, 1)}>
+                <Image style={styles.iconhor} source={{uri: url1}} />
+              </TouchableOpacity>
+            : null}
+          <Animated.View style={styles.card, animatedCardStyles, styles.squareView} {...this._panResponder.panHandlers}>
+            {currentRestaurant.photos.length > 2 ?
+              <TouchableOpacity onPress={this.openModal.bind(this, 2)}>
+                <Image style={styles.iconver} source={{uri: url2}} />
+              </TouchableOpacity> : <TouchableOpacity onPress={this.openModal.bind(this, url2)}>
+                <Image style={styles.iconhor} source={{uri: url2}} />
+              </TouchableOpacity>
+            }
+            {url3 ?
+              <TouchableOpacity onPress={this.openModal.bind(this, 3)}>
+                <Image style={styles.iconver} source={{uri: url3}} />
+              </TouchableOpacity>
+            : null}
+          </Animated.View>
+            {url4 ?
+              <TouchableOpacity onPress={this.openModal.bind(this, 4)}>
+              <Image style={styles.iconhor} source={{uri: url4}} />
+              </TouchableOpacity>
+              : null}
         </Animated.View>
-
         <Animated.View style={[styles.nope, animatedNopeStyles]} >
           <Text style={styles.nopeText}>No No</Text>
         </Animated.View>
         <Animated.View style={[styles.yup, animatedYupStyles]}>
           <Text style={styles.yupText}>Nom Nom</Text>
         </Animated.View>
+        </View>
       </View>
     )
   }
 
   getImageSrc(index) {
-    var remainder = Math.abs(index % this.props.restaurant.photos.length);
-    return(this.props.restaurant.photos[remainder]);
+    var index = Math.abs( index % this.props.restaurant.photos.length);
+    return(this.props.restaurant.photos[index]);
   }
 
   componentDidMount(){
@@ -200,25 +209,36 @@ class Restaurant extends Component {
 
 const styles = StyleSheet.create({
   container: {
+    marginTop:20,
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#300030'
+    backgroundColor: '#300030',
   },
   content: {
+    flex: 1,
     color: 'white',
     fontSize: 25,
-    marginBottom: 20,
     fontFamily: 'Hiragino Kaku Gothic ProN'
   },
-  icon: {
+  iconhor: {
     width: 400,
+    height: 185,
+    margin: 2,
+    justifyContent: 'center',
+  },
+  iconver: {
+    width: 200,
     height: 150,
     margin: 2,
     justifyContent: 'center',
   },
+  squareView:{
+    flexDirection: 'row'
+  },
   card: {
+    flex: 1,
     width: 200,
     height: 200,
     backgroundColor: 'red'
@@ -254,9 +274,22 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent'
   },
   logo: {
-    marginBottom: 50,
-    height: 100,
-    width: 150
+    marginLeft: 130,
+    marginTop: 20,
+    height: 80,
+    width: 120,
+  },
+  logoContainer: {
+    flex: 1,
+    flexDirection: 'column',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  headerMargins: {
+    marginTop: 115,
   }
 })
 

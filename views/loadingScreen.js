@@ -51,6 +51,7 @@ class LoadingScreen extends Component {
 }
 const styles = StyleSheet.create({
   loading: {
+    marginTop:20,
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',

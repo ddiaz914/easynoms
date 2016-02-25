@@ -63,10 +63,10 @@ class RestaurantInfo extends Component {
               animateDrop: true,
               latitude: Number(restaurant.lat),
               longitude: Number(restaurant.lng),
-              title: restaurant.address,
+              title: streetAddress,
             }]}
           />
-          <View style={styles.something}>
+          <View style={styles.websiteContainer}>
             {website}
             <Text style={styles.directions} onPress={()=>{Linking.openURL("http://maps.apple.com/?daddr=" + restaurant.lat + "," + restaurant.lng)}}>Directions</Text>
           </View>
@@ -87,6 +87,7 @@ class RestaurantInfo extends Component {
 
 const styles = StyleSheet.create({
   container: {
+    marginTop:20,
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
@@ -96,9 +97,9 @@ const styles = StyleSheet.create({
   title: {
     color: 'white',
     fontFamily: 'Hiragino Kaku Gothic ProN',
-    marginBottom: 10,
+    marginBottom: 5,
     fontWeight: 'bold',
-    fontSize: 18,
+    fontSize: 22,
     marginTop: 10
   },
   content: {
@@ -106,9 +107,8 @@ const styles = StyleSheet.create({
     fontFamily: 'Hiragino Kaku Gothic ProN',
   },
   map: {
-    width: 350,
-    height: 310,
-    marginBottom: 5,
+    width: 330,
+    height: 280,
   },
   logo: {
     // marginTop: 10,
@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
     color: 'white',
     marginRight: 310,
     fontWeight: 'bold',
-    marginTop: 20,
+    marginTop: 10,
   },
   websiteButton: {
     flex: 1,
@@ -153,11 +153,10 @@ const styles = StyleSheet.create({
     color: 'white',
     paddingBottom: 4,
     marginTop: 4,
-    marginBottom: 20,
     fontSize: 25,
     textDecorationLine: 'underline',
   },
-  something: {
+  websiteContainer: {
     flexDirection: 'row',
     marginTop: 20,
     marginBottom: 20,
