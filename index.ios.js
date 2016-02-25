@@ -65,7 +65,7 @@ class EasyNoms extends Component {
       case Restaurant:
         return this.renderRestaurant(route, navigator);
       case ImageModal:
-        return <ImageModal navigator={navigator} uri={route.url}/>
+        return <ImageModal navigator={navigator} getImage={route.getImage} index={route.index}/>
       case RestaurantInfo:
         return(
           <RestaurantInfo

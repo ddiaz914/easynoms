@@ -43,11 +43,12 @@ class Restaurant extends Component {
     });
   }
 
-  openModal(url) {
+  openModal(index) {
     this.props.navigator.push({
       component: ImageModal,
-      url: url
-    })
+      getImage: this.getImageSrc.bind(this),
+      index: index
+    });
   }
 
   render() {
@@ -81,13 +82,7 @@ class Restaurant extends Component {
 
     var currentRestaurant = this.props.restaurant;
     if (currentRestaurant) {
-      console.log(currentRestaurant);
-      // console.log(this.state.restaurants); // DEBUGGING
-      var url1 = currentRestaurant.photos[0];
-      var url2 = currentRestaurant.photos[1];
-      var url3 = currentRestaurant.photos[2];
-      var url4 = currentRestaurant.photos[3];
-      var url5 = currentRestaurant.photos[4];
+      var [url1, url2, url3, url4, url5] = currentRestaurant.photos;
     } else {
       SWIPE_THRESHOLD=1000;
     }
@@ -105,26 +100,26 @@ class Restaurant extends Component {
         <View style={styles.headerMargins}>
         <Animated.View style={styles.card, animatedCardStyles} {...this._panResponder.panHandlers}>
             {url1 ?
-              <TouchableOpacity onPress={this.openModal.bind(this, url1)}>
+              <TouchableOpacity onPress={this.openModal.bind(this, 1)}>
                 <Image style={styles.iconhor} source={{uri: url1}} />
               </TouchableOpacity>
             : null}
           <Animated.View style={styles.card, animatedCardStyles, styles.squareView} {...this._panResponder.panHandlers}>
             {currentRestaurant.photos.length > 2 ?
-              <TouchableOpacity onPress={this.openModal.bind(this, url2)}>
+              <TouchableOpacity onPress={this.openModal.bind(this, 2)}>
                 <Image style={styles.iconver} source={{uri: url2}} />
               </TouchableOpacity> : <TouchableOpacity onPress={this.openModal.bind(this, url2)}>
                 <Image style={styles.iconhor} source={{uri: url2}} />
               </TouchableOpacity>
             }
             {url3 ?
-              <TouchableOpacity onPress={this.openModal.bind(this, url3)}>
+              <TouchableOpacity onPress={this.openModal.bind(this, 3)}>
                 <Image style={styles.iconver} source={{uri: url3}} />
               </TouchableOpacity>
             : null}
           </Animated.View>
             {url4 ?
-              <TouchableOpacity onPress={this.openModal.bind(this, url4)}>
+              <TouchableOpacity onPress={this.openModal.bind(this, 4)}>
               <Image style={styles.iconhor} source={{uri: url4}} />
               </TouchableOpacity>
               : null}
@@ -138,6 +133,11 @@ class Restaurant extends Component {
         </View>
       </View>
     )
+  }
+
+  getImageSrc(index) {
+    var index = Math.abs( index % this.props.restaurant.photos.length);
+    return(this.props.restaurant.photos[index]);
   }
 
   componentDidMount(){
@@ -231,12 +231,11 @@ const styles = StyleSheet.create({
     flex: 1,
     color: 'white',
     fontSize: 25,
-    marginTop: 20,
     fontFamily: 'Hiragino Kaku Gothic ProN'
   },
   iconhor: {
     width: 400,
-    height: 150,
+    height: 185,
     margin: 2,
     justifyContent: 'center',
   },
@@ -326,6 +325,7 @@ const styles = StyleSheet.create({
   },
   rightText: {
     color: 'white',
+    marginTop: 115,
   }
 })
 
