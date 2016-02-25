@@ -116,7 +116,7 @@ class Restaurant extends Component {
   }
 
   getImageSrc(index) {
-    var remainder = index % this.props.restaurant.photos.length;
+    var remainder = Math.abs(index % this.props.restaurant.photos.length);
     return(this.props.restaurant.photos[remainder]);
   }
 

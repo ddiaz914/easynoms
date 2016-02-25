@@ -14,6 +14,8 @@ var {
   Animated,
 } = React;
 
+const SWIPE_THRESHOLD = 120;
+
 var {
   height: deviceHeight,
   width: deviceWidth
@@ -24,7 +26,7 @@ class ImageModal extends Component {
     super(props);
     this.state = {
       pan: new Animated.ValueXY(),
-      enter: new Animated.Value(0.3)
+      enter: new Animated.Value(1)
     }
   }
 
@@ -33,12 +35,13 @@ class ImageModal extends Component {
   }
 
   render() {
-    console.log(this.props.uri)
     return(
-      <View style={styles.modal}>
-        <TouchableOpacity style={styles.close} onPress={() => this.close.call(this) }>
-          <Image style={styles.modalImage} source={{uri: this.image()}}/>
-        </TouchableOpacity>
+      <View style={styles.modal} >
+        <Animated.View style={this._getAnimationStyle()} {...this._panResponder.panHandlers}>
+          <TouchableOpacity style={styles.close} onPress={() => this.close.call(this) }>
+            <Image style={styles.modalImage} source={{uri: this.image()}}/>
+          </TouchableOpacity>
+        </Animated.View>
       </View>
     )
   }
@@ -50,17 +53,29 @@ class ImageModal extends Component {
   _nextPhoto() {
     this.props.navigator.replace({
       component: ImageModal,
-      getImage: this.getImage,
-      index: index + 1
+      getImage: this.props.getImage,
+      index: this.props.index + 1
     });
+    this._resetState();
+  }
+
+  _getAnimationStyle() {
+    let { pan } = this.state;
+    let [translateX, translateY] = [pan.x, 0];
+    return{transform: [{translateX}, {translateY}]};
+  }
+
+  _resetState() {
+    this.state.pan.setValue({x: 0, y: 0});
   }
 
   _prevPhoto() {
     this.props.navigator.replace({
       component: ImageModal,
-      getImage: this.getImage,
-      index: index - 1
+      getImage: this.props.getImage,
+      index: this.props.index - 1
     });
+    this._resetState();
   }
 
   componentWillMount() {
@@ -93,7 +108,7 @@ class ImageModal extends Component {
             this._prevPhoto.bind(this);
 
           Animated.decay(this.state.pan, {
-            velocity: {x: velocity, y: vy},
+            velocity: {x: velocity*2, y: vy*2},
             deceleration: 0.98
           }).start(swipeFunction)
         } else {
