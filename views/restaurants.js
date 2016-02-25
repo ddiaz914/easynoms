@@ -220,12 +220,11 @@ const styles = StyleSheet.create({
     flex: 1,
     color: 'white',
     fontSize: 25,
-    marginTop: 20,
     fontFamily: 'Hiragino Kaku Gothic ProN'
   },
   iconhor: {
     width: 400,
-    height: 150,
+    height: 185,
     margin: 2,
     justifyContent: 'center',
   },
@@ -290,7 +289,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   headerMargins: {
-    marginTop: 50,
+    marginTop: 115,
   }
 })
 
